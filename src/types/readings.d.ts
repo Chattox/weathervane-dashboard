@@ -17,12 +17,12 @@ export type ApiReading = {
 
 export type FormattedReading = {
   timestamp: string;
-  Pressure: number;
-  Rain: number;
-  "Wind speed": number;
-  Temperature: number;
-  Humidity: number;
-  "Wind direction": number;
-  "Rain per second": number;
-  Luminance: number;
+  pressure: number;
+  rain: number;
+  wind_speed: number;
+  temperature: number;
+  humidity: number;
+  wind_direction: number;
+  rain_per_second: number;
+  luminance: number;
 };

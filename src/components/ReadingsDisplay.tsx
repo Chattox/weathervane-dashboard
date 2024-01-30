@@ -2,6 +2,7 @@ import { LineChart } from "@mantine/charts";
 import { FormattedReading } from "../types/readings";
 
 export const ReadingsDisplay = (props: { readings: FormattedReading[] }) => {
+  console.log(props.readings);
   return (
     <LineChart
       h={400}
@@ -9,14 +10,14 @@ export const ReadingsDisplay = (props: { readings: FormattedReading[] }) => {
       data={props.readings}
       dataKey="timestamp"
       series={[
-        { name: "Pressure", color: "grape.6" },
-        { name: "Rain", color: "teal.6" },
-        { name: "Wind speed", color: "cyan.6" },
-        { name: "Temperature", color: "green.6" },
-        { name: "Humidity", color: "indigo.6" },
-        { name: "Wind direction", color: "pink.6" },
-        { name: "Rain per second", color: "blue.6" },
-        { name: "Luminance", color: "orange.6" },
+        { name: "pressure", label: "Pressure", color: "grape.6" },
+        { name: "rain", label: "Rain", color: "teal.6" },
+        { name: "wind_speed", label: "Wind speed", color: "cyan.6" },
+        { name: "temperature", label: "Temperature", color: "green.6" },
+        { name: "humidity", label: "Humidity", color: "indigo.6" },
+        { name: "wind_direction", label: "Wind direction", color: "pink.6" },
+        { name: "rain_per_second", label: "Rain per second", color: "blue.6" },
+        { name: "luminance", label: "Luminance", color: "orange.6" },
       ]}
       curveType="linear"
     />
