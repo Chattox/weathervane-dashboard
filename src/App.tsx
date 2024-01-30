@@ -6,6 +6,7 @@ import "./App.css";
 import { getAllReadings } from "./utils/api";
 import { formatReadings } from "./utils/formatReadings";
 import { FormattedReading } from "./types/readings";
+import { ReadingsDisplay } from "./components/ReadingsDisplay";
 
 function App() {
   const [readings, setReadings] = useState<FormattedReading[]>([]);
@@ -15,11 +16,14 @@ function App() {
     getAllReadings().then((res) => {
       setReadings(formatReadings(res));
       setLoading(false);
-      console.log(readings);
     });
   }, []);
 
-  return <MantineProvider></MantineProvider>;
+  return (
+    <MantineProvider>
+      {loading ? <p>loading</p> : <ReadingsDisplay readings={readings} />}
+    </MantineProvider>
+  );
 }
 
 export default App;
