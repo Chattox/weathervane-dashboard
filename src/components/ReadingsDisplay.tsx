@@ -1,5 +1,6 @@
 import { LineChart } from "@mantine/charts";
 import { FormattedReading } from "../types/readings";
+import { READINGS_LABELS } from "../consts";
 
 export const ReadingsDisplay = (props: { readings: FormattedReading[] }) => {
   console.log(props.readings);
@@ -10,22 +11,42 @@ export const ReadingsDisplay = (props: { readings: FormattedReading[] }) => {
       data={props.readings}
       dataKey="timestamp"
       series={[
-        { name: "pressure", label: "Pressure (hPa)", color: "grape.6" },
-        { name: "rain", label: "Rain (mm)", color: "teal.6" },
-        { name: "wind_speed", label: "Wind speed (m/s)", color: "cyan.6" },
-        { name: "temperature", label: "Temperature (°C)", color: "green.6" },
-        { name: "humidity", label: "Humidity (%)", color: "indigo.6" },
+        {
+          name: "pressure",
+          label: READINGS_LABELS.pressure,
+          color: "grape.6",
+        },
+        { name: "rain", label: READINGS_LABELS.rain, color: "teal.6" },
+        {
+          name: "wind_speed",
+          label: READINGS_LABELS.wind_speed,
+          color: "cyan.6",
+        },
+        {
+          name: "temperature",
+          label: READINGS_LABELS.temperature,
+          color: "green.6",
+        },
+        {
+          name: "humidity",
+          label: READINGS_LABELS.humidity,
+          color: "indigo.6",
+        },
         {
           name: "wind_direction",
-          label: "Wind direction (°)",
+          label: READINGS_LABELS.wind_direction,
           color: "pink.6",
         },
         {
           name: "rain_per_second",
-          label: "Rain per second (mm/s)",
+          label: READINGS_LABELS.rain_per_second,
           color: "blue.6",
         },
-        { name: "luminance", label: "Luminance (lx)", color: "orange.6" },
+        {
+          name: "luminance",
+          label: READINGS_LABELS.luminance,
+          color: "orange.6",
+        },
       ]}
       curveType="linear"
     />
