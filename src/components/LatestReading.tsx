@@ -11,7 +11,6 @@ export const LatestReading = () => {
 
   useEffect(() => {
     getLatestReading().then((res) => {
-      console.log(res);
       setLatestReading(formatReadings(res)[0]);
       setLoading(false);
     });
@@ -19,7 +18,7 @@ export const LatestReading = () => {
 
   const readingData = Object.keys(READINGS_LABELS).map(
     (measurement: string) => (
-      <Grid.Col span={6}>
+      <Grid.Col span={6} key={READINGS_LABELS[measurement].label}>
         <Title order={5}>{READINGS_LABELS[measurement].label}</Title>
         <p>
           {latestReading?.[measurement]}

@@ -19,7 +19,7 @@ export const ReadingsOverview = () => {
   }, []);
 
   const data = Object.keys(READINGS_LABELS).map((measurement: string) => (
-    <Grid.Col span={6}>
+    <Grid.Col span={6} key={READINGS_LABELS[measurement].label}>
       <Accordion.Item
         key={measurement}
         value={READINGS_LABELS[measurement].label}

@@ -5,7 +5,6 @@ export const formatReadings = (readings: ApiReading[]): FormattedReading[] => {
     const formattedTimestamp = new Date(reading.timestamp).toLocaleString(
       "en-GB"
     );
-    console.log(readings);
     return {
       timestamp: formattedTimestamp,
       pressure: reading.readings.pressure,
