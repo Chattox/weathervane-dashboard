@@ -7,6 +7,7 @@ import { getAllReadings } from "./utils/api";
 import { formatReadings } from "./utils/formatReadings";
 import { FormattedReading } from "./types/global";
 import { ReadingsOverview } from "./components/ReadingsOverview";
+import { LatestReading } from "./components/LatestReading";
 
 function App() {
   const [readings, setReadings] = useState<FormattedReading[]>([]);
@@ -21,6 +22,7 @@ function App() {
 
   return (
     <MantineProvider>
+      <LatestReading />
       {loading ? <p>loading</p> : <ReadingsOverview readings={readings} />}
     </MantineProvider>
   );

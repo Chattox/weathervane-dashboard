@@ -1,14 +1,19 @@
 import axios from "axios";
 
-export const getAllReadings = () => {
-  const dbUrl = import.meta.env.PROD
-    ? import.meta.env.PUBLIC_PROD_DB_URL
-    : import.meta.env.PUBLIC_DEV_DB_URL;
+const dbUrl = import.meta.env.PROD
+  ? import.meta.env.PUBLIC_PROD_DB_URL
+  : import.meta.env.PUBLIC_DEV_DB_URL;
 
+export const getAllReadings = () => {
   return axios
     .get(`${dbUrl}/all`)
-    .then((res) => {
-      return res.data;
-    })
+    .then((res) => res.data)
+    .catch((err) => console.log(err));
+};
+
+export const getLatestReading = () => {
+  return axios
+    .get(`${dbUrl}/latest`)
+    .then((res) => res.data)
     .catch((err) => console.log(err));
 };
