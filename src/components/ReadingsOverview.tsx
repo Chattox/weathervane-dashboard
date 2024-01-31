@@ -1,4 +1,4 @@
-import { Accordion, Box, Center, Grid, Title } from "@mantine/core";
+import { Accordion, Center, Grid } from "@mantine/core";
 import { FormattedReading } from "../types/global";
 import { READINGS_LABELS } from "../consts";
 import { ReadingSparkline } from "./ReadingSparkline";
@@ -19,7 +19,7 @@ export const ReadingsOverview = () => {
   }, []);
 
   const data = Object.keys(READINGS_LABELS).map((measurement: string) => (
-    <Grid.Col span={6}>
+    <Grid.Col span={6} key={READINGS_LABELS[measurement].label}>
       <Accordion.Item
         key={measurement}
         value={READINGS_LABELS[measurement].label}
@@ -43,16 +43,11 @@ export const ReadingsOverview = () => {
   return (
     <>
       {loading ? (
-        <p>Loading...</p>
+        <p>Loading</p>
       ) : (
-        <Box>
-          <Title order={3} ta="left" pb="md">
-            Overview
-          </Title>
-          <Accordion multiple>
-            <Grid>{data}</Grid>
-          </Accordion>
-        </Box>
+        <Accordion multiple>
+          <Grid>{data}</Grid>
+        </Accordion>
       )}
     </>
   );
