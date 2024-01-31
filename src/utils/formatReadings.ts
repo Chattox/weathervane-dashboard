@@ -1,4 +1,4 @@
-import { ApiReading, FormattedReading } from "../types/readings";
+import { ApiReading, FormattedReading } from "../types/global";
 
 export const formatReadings = (readings: ApiReading[]): FormattedReading[] => {
   return readings.map((reading: ApiReading): FormattedReading => {

@@ -5,8 +5,8 @@ import "@mantine/charts/styles.css";
 import "./App.css";
 import { getAllReadings } from "./utils/api";
 import { formatReadings } from "./utils/formatReadings";
-import { FormattedReading } from "./types/readings";
-import { ReadingsDisplay } from "./components/ReadingsDisplay";
+import { FormattedReading } from "./types/global";
+import { ReadingsOverview } from "./components/ReadingsOverview";
 
 function App() {
   const [readings, setReadings] = useState<FormattedReading[]>([]);
@@ -21,7 +21,7 @@ function App() {
 
   return (
     <MantineProvider>
-      {loading ? <p>loading</p> : <ReadingsDisplay readings={readings} />}
+      {loading ? <p>loading</p> : <ReadingsOverview readings={readings} />}
     </MantineProvider>
   );
 }
