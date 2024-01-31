@@ -2,8 +2,11 @@ import { ApiReading, FormattedReading } from "../types/readings";
 
 export const formatReadings = (readings: ApiReading[]): FormattedReading[] => {
   return readings.map((reading: ApiReading): FormattedReading => {
+    const formattedTimestamp = new Date(reading.timestamp).toLocaleString(
+      "en-GB"
+    );
     return {
-      timestamp: reading.timestamp,
+      timestamp: formattedTimestamp,
       pressure: reading.readings.pressure,
       rain: reading.readings.rain,
       wind_speed: reading.readings.wind_speed,
