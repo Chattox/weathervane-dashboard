@@ -12,7 +12,9 @@ export const ReadingChart = (props: {
       w={600}
       data={props.readings}
       dataKey="timestamp"
-      yAxisProps={{ domain: ["auto", "auto"] }}
+      unit={READINGS_LABELS[props.measurement].unit}
+      yAxisProps={{ domain: ["auto", "auto"], width: 70 }}
+      xAxisProps={{ tick: false }}
       series={[
         {
           name: props.measurement,

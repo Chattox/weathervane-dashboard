@@ -33,12 +33,12 @@ export interface FormattedReading {
 export interface ReadingLabels {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: Record<string, string | DefaultMantineColor>;
-  pressure: { label: string; color: DefaultMantineColor };
-  rain: { label: string; color: DefaultMantineColor };
-  wind_speed: { label: string; color: DefaultMantineColor };
-  temperature: { label: string; color: DefaultMantineColor };
-  humidity: { label: string; color: DefaultMantineColor };
-  wind_direction: { label: string; color: DefaultMantineColor };
-  rain_per_second: { label: string; color: DefaultMantineColor };
-  luminance: { label: string; color: DefaultMantineColor };
+  pressure: { label: string; color: DefaultMantineColor; unit: string };
+  rain: { label: string; color: DefaultMantineColor; unit: string };
+  wind_speed: { label: string; color: DefaultMantineColor; unit: string };
+  temperature: { label: string; color: DefaultMantineColor; unit: string };
+  humidity: { label: string; color: DefaultMantineColor; unit: string };
+  wind_direction: { label: string; color: DefaultMantineColor; unit: string };
+  rain_per_second: { label: string; color: DefaultMantineColor; unit: string };
+  luminance: { label: string; color: DefaultMantineColor; unit: string };
 }
