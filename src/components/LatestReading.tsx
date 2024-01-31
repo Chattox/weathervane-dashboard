@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { FormattedReading } from "../types/global";
 import { getLatestReading } from "../utils/api";
 import { formatReadings } from "../utils/formatReadings";
-import { Box, Grid, Title } from "@mantine/core";
+import { Grid, Title } from "@mantine/core";
 import { READINGS_LABELS } from "../consts";
 
 export const LatestReading = () => {
@@ -29,18 +29,5 @@ export const LatestReading = () => {
     )
   );
 
-  return (
-    <>
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        <Box>
-          <Title order={3} ta="left" pb="md">
-            Latest Reading
-          </Title>
-          <Grid>{readingData}</Grid>
-        </Box>
-      )}
-    </>
-  );
+  return <>{loading ? <p>Loading...</p> : <Grid>{readingData}</Grid>}</>;
 };

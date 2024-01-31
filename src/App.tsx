@@ -2,14 +2,12 @@ import { MantineProvider } from "@mantine/core";
 import "@mantine/core/styles.css";
 import "@mantine/charts/styles.css";
 import "./App.css";
-import { ReadingsOverview } from "./components/ReadingsOverview";
-import { LatestReading } from "./components/LatestReading";
+import { DashboardContainer } from "./components/DashboardContainer";
 
 function App() {
   return (
     <MantineProvider>
-      <LatestReading />
-      <ReadingsOverview />
+      <DashboardContainer />
     </MantineProvider>
   );
 }

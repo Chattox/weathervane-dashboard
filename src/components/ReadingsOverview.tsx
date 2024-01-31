@@ -1,4 +1,4 @@
-import { Accordion, Box, Center, Grid, Title } from "@mantine/core";
+import { Accordion, Center, Grid } from "@mantine/core";
 import { FormattedReading } from "../types/global";
 import { READINGS_LABELS } from "../consts";
 import { ReadingSparkline } from "./ReadingSparkline";
@@ -43,16 +43,11 @@ export const ReadingsOverview = () => {
   return (
     <>
       {loading ? (
-        <p>Loading...</p>
+        <p>Loading</p>
       ) : (
-        <Box>
-          <Title order={3} ta="left" pb="md">
-            Overview
-          </Title>
-          <Accordion multiple>
-            <Grid>{data}</Grid>
-          </Accordion>
-        </Box>
+        <Accordion multiple>
+          <Grid>{data}</Grid>
+        </Accordion>
       )}
     </>
   );
