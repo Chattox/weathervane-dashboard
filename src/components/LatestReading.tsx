@@ -23,6 +23,7 @@ export const LatestReading = () => {
         label={READINGS_LABELS[measurement].label}
         reading={latestReading?.[measurement] as number}
         unit={READINGS_LABELS[measurement].unit}
+        key={READINGS_LABELS[measurement].label}
       />
     )
   );
