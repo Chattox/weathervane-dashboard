@@ -8,7 +8,7 @@ export const DashboardContainer = () => {
       <Title order={2} ta="left" mb="md">
         Weathervane Dashboard
       </Title>
-      <Accordion multiple radius={0}>
+      <Accordion multiple defaultValue={["latest", "overview"]} radius={0}>
         <Accordion.Item key="latest" value="latest">
           <Accordion.Control>Latest</Accordion.Control>
           <Accordion.Panel>

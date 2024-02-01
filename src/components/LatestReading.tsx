@@ -4,7 +4,7 @@ import { getLatestReading } from "../utils/api";
 import { formatReadings } from "../utils/formatReadings";
 import { Group } from "@mantine/core";
 import { READINGS_LABELS } from "../consts";
-import { CurrentReadingCard } from "./CurrentReadingCard";
+import { LatestReadingCard } from "./LatestReadingCard";
 
 export const LatestReading = () => {
   const [latestReading, setLatestReading] = useState<FormattedReading>();
@@ -19,7 +19,7 @@ export const LatestReading = () => {
 
   const readingData = Object.keys(READINGS_LABELS).map(
     (measurement: string) => (
-      <CurrentReadingCard
+      <LatestReadingCard
         label={READINGS_LABELS[measurement].label}
         reading={latestReading?.[measurement] as number}
         unit={READINGS_LABELS[measurement].unit}

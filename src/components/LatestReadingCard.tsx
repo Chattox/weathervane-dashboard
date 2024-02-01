@@ -1,6 +1,6 @@
 import { Group, Paper, Stack, Text, Title } from "@mantine/core";
 
-export const CurrentReadingCard = (props: {
+export const LatestReadingCard = (props: {
   label: string;
   reading: number;
   unit: string;
@@ -8,12 +8,16 @@ export const CurrentReadingCard = (props: {
   secondUnit?: string;
 }) => {
   return (
-    <Paper h={150} miw={200} shadow="xs" p="sm" withBorder>
+    <Paper h={150} miw={250} shadow="xs" p="sm" withBorder>
       <Stack h="100%" justify="flex-start" ta="center">
-        <Title order={3}>{props.label}</Title>
+        <Text size="lg">{props.label}</Text>
         <Group justify="center">
-          <Title order={1}>{props.reading}</Title>
-          <Text size="lg">{props.unit}</Text>
+          <Text size="cardMeasurement" fw={500}>
+            {props.reading}
+          </Text>
+          <Text size="cardUnit" fw={500}>
+            {props.unit}
+          </Text>
         </Group>
       </Stack>
     </Paper>
