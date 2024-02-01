@@ -1,4 +1,4 @@
-import { Group, Paper, Stack, Text, Title } from "@mantine/core";
+import { Group, Paper, Stack, Text } from "@mantine/core";
 
 export const LatestReadingCard = (props: {
   label: string;

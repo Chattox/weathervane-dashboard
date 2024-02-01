@@ -1,13 +1,17 @@
-import { Accordion, Box, Title } from "@mantine/core";
+import { Accordion, Box, Group, Title } from "@mantine/core";
 import { LatestReading } from "./LatestReading";
 import { ReadingsOverview } from "./ReadingsOverview";
+import { ColorSchemeSwitcher } from "./ColorSchemeSwitcher";
 
 export const DashboardContainer = () => {
   return (
     <Box>
-      <Title order={2} ta="left" mb="md">
-        Weathervane Dashboard
-      </Title>
+      <Group w="100%" justify="space-between">
+        <Title order={2} ta="left" mb="md">
+          Weathervane Dashboard
+        </Title>
+        <ColorSchemeSwitcher />
+      </Group>
       <Accordion multiple defaultValue={["latest", "overview"]} radius={0}>
         <Accordion.Item key="latest" value="latest">
           <Accordion.Control>Latest</Accordion.Control>
