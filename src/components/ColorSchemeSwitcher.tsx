@@ -11,9 +11,10 @@ export const ColorSchemeSwitcher = () => {
 
   return (
     <ActionIcon
-      onClick={() =>
-        setColorScheme(computedColorScheme === "dark" ? "light" : "dark")
-      }
+      onClick={() => {
+        setColorScheme(computedColorScheme === "dark" ? "light" : "dark");
+        console.log(computedColorScheme);
+      }}
       variant="default"
       size="xl"
     >

@@ -1,4 +1,5 @@
 import {
+  CSSVariablesResolver,
   DefaultMantineColor,
   MantineColorsTuple,
   createTheme,
@@ -31,6 +32,19 @@ const wBlue: MantineColorsTuple = [
   "#008194",
 ];
 
+const wGrey: MantineColorsTuple = [
+  "#f0f2f5",
+  "#d1d8e0",
+  "#b3becc",
+  "#94a5b7",
+  "#768ba3",
+  "#5c7189",
+  "#48586b",
+  "#333f4c",
+  "#131619",
+  "#0e0e13",
+];
+
 type ExtendedColors = "wGreen" | "wBlue" | DefaultMantineColor;
 
 declare module "@mantine/core" {
@@ -43,11 +57,20 @@ export const theme = createTheme({
   colors: {
     wGreen,
     wBlue,
+    wGrey,
   },
   primaryColor: "wGreen",
-  black: "#1f262E",
+  black: "#0e0e13",
   fontSizes: {
     cardUnit: rem(28),
     cardMeasurement: rem(46),
   },
+});
+
+export const resolver: CSSVariablesResolver = (theme) => ({
+  variables: {},
+  dark: {
+    "--mantine-color-body": theme.colors.wGrey[9],
+  },
+  light: {},
 });

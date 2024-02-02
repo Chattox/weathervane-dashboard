@@ -4,7 +4,7 @@ import { getLatestReading } from "../utils/api";
 import { formatReadings } from "../utils/formatReadings";
 import { Group, Stack, Text } from "@mantine/core";
 import { READINGS_LABELS } from "../consts";
-import { LatestReadingCard } from "./LatestReadingCard";
+import { LatestReadingCard } from "./LatestReadingCard/LatestReadingCard";
 
 export const LatestReading = () => {
   const [latestReading, setLatestReading] = useState<FormattedReading>();
