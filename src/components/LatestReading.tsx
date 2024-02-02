@@ -20,9 +20,8 @@ export const LatestReading = () => {
   const readingData = Object.keys(READINGS_LABELS).map(
     (measurement: string) => (
       <LatestReadingCard
-        label={READINGS_LABELS[measurement].label}
+        measurement={measurement}
         reading={latestReading?.[measurement] as number}
-        unit={READINGS_LABELS[measurement].unit}
         key={READINGS_LABELS[measurement].label}
       />
     )

@@ -1,6 +1,11 @@
-import { MantineColorsTuple, createTheme, rem } from "@mantine/core";
+import {
+  DefaultMantineColor,
+  MantineColorsTuple,
+  createTheme,
+  rem,
+} from "@mantine/core";
 
-const greenPrimary: MantineColorsTuple = [
+const wGreen: MantineColorsTuple = [
   "#ecfbea",
   "#ddf2da",
   "#bce2b7",
@@ -13,10 +18,34 @@ const greenPrimary: MantineColorsTuple = [
   "#337b2c",
 ];
 
+const wBlue: MantineColorsTuple = [
+  "#e2fdff",
+  "#d3f3f9",
+  "#abe4ee",
+  "#80d5e4",
+  "#5dc9da",
+  "#46c1d5",
+  "#35bdd3",
+  "#21a6bc",
+  "#0694a8",
+  "#008194",
+];
+
+type ExtendedColors = "wGreen" | "wBlue" | DefaultMantineColor;
+
+declare module "@mantine/core" {
+  export interface MantineThemeColorsOverride {
+    colors: Record<ExtendedColors, MantineColorsTuple>;
+  }
+}
+
 export const theme = createTheme({
   colors: {
-    greenPrimary,
+    wGreen,
+    wBlue,
   },
+  primaryColor: "wGreen",
+  black: "#1f262E",
   fontSizes: {
     cardUnit: rem(28),
     cardMeasurement: rem(46),
