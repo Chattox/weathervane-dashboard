@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { FormattedReading } from "../types/global";
 import { getLatestReading } from "../utils/api";
 import { formatReadings } from "../utils/formatReadings";
-import { Group } from "@mantine/core";
+import { Group, Stack, Text } from "@mantine/core";
 import { READINGS_LABELS } from "../consts";
 import { LatestReadingCard } from "./LatestReadingCard";
 
@@ -32,9 +32,12 @@ export const LatestReading = () => {
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <Group w="100%" gap="xs" grow>
-          {readingData}
-        </Group>
+        <Stack>
+          <Text fw={500}>Latest reading: {latestReading?.timestamp}</Text>
+          <Group w="100%" gap="xs" grow>
+            {readingData}
+          </Group>
+        </Stack>
       )}
     </>
   );

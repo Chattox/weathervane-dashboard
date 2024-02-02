@@ -17,22 +17,15 @@ export const DashboardContainer = () => {
         multiple
         defaultValue={["latest", "overview"]}
         chevronPosition="left"
+        classNames={{ item: classes.item, label: classes.label }}
       >
-        <Accordion.Item
-          key="latest"
-          value="latest"
-          classNames={{ item: classes.item }}
-        >
-          <Accordion.Control>Latest</Accordion.Control>
+        <Accordion.Item key="latest" value="latest">
+          <Accordion.Control>Current conditions</Accordion.Control>
           <Accordion.Panel>
             <LatestReading />
           </Accordion.Panel>
         </Accordion.Item>
-        <Accordion.Item
-          key="overview"
-          value="overview"
-          classNames={{ item: classes.item }}
-        >
+        <Accordion.Item key="overview" value="overview">
           <Accordion.Control>Overview</Accordion.Control>
           <Accordion.Panel>
             <ReadingsOverview />
