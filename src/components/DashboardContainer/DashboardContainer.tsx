@@ -1,7 +1,8 @@
 import { Accordion, Box, Group, Title } from "@mantine/core";
-import { LatestReading } from "./LatestReading";
-import { ReadingsOverview } from "./ReadingsOverview";
-import { ColorSchemeSwitcher } from "./ColorSchemeSwitcher";
+import { LatestReading } from "../LatestReading";
+import { ReadingsOverview } from "../ReadingsOverview";
+import { ColorSchemeSwitcher } from "../ColorSchemeSwitcher";
+import classes from "./DashboardContainer.module.css";
 
 export const DashboardContainer = () => {
   return (
@@ -12,14 +13,26 @@ export const DashboardContainer = () => {
         </Title>
         <ColorSchemeSwitcher />
       </Group>
-      <Accordion multiple defaultValue={["latest", "overview"]} radius={0}>
-        <Accordion.Item key="latest" value="latest">
+      <Accordion
+        multiple
+        defaultValue={["latest", "overview"]}
+        chevronPosition="left"
+      >
+        <Accordion.Item
+          key="latest"
+          value="latest"
+          classNames={{ item: classes.item }}
+        >
           <Accordion.Control>Latest</Accordion.Control>
           <Accordion.Panel>
             <LatestReading />
           </Accordion.Panel>
         </Accordion.Item>
-        <Accordion.Item key="overview" value="overview">
+        <Accordion.Item
+          key="overview"
+          value="overview"
+          classNames={{ item: classes.item }}
+        >
           <Accordion.Control>Overview</Accordion.Control>
           <Accordion.Panel>
             <ReadingsOverview />
