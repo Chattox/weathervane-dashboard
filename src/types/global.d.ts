@@ -52,3 +52,8 @@ export type IndividualReadingData = {
   timestamp: string;
   [key: string]: number | string;
 };
+
+export type WindData = {
+  direction: number[];
+  speed: number[];
+};

@@ -8,6 +8,8 @@ import classes from "./ReadingsHistoryContainer.module.css";
 import { ReadingAreaChart } from "../charts/ReadingAreaChart";
 import { getIndividualReadingHistory } from "../../utils/getIndividualReadingHistory";
 import { ReadingBarChart } from "../charts/ReadingBarChart";
+import { formatWindData } from "../../utils/formatWindData";
+import { ReadingWindRose } from "../charts/ReadingWindRose";
 
 export const ReadingsHistoryContainer = () => {
   const [readings, setReadings] = useState<FormattedReading[]>([]);
@@ -26,7 +28,7 @@ export const ReadingsHistoryContainer = () => {
     wind_speed: "area",
     temperature: "area",
     humidity: "area",
-    wind_direction: "area",
+    wind_direction: "windRose",
     rain_per_second: "bar",
     luminance: "area",
   };
@@ -37,6 +39,8 @@ export const ReadingsHistoryContainer = () => {
         return <ReadingAreaChart data={data} measurement={measurement} />;
       case "bar":
         return <ReadingBarChart data={data} measurement={measurement} />;
+      case "windRose":
+        return <ReadingWindRose data={formatWindData(readings)} />;
       default:
         return undefined;
     }
