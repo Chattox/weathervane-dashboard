@@ -1,6 +1,5 @@
 import { Accordion, Box, Group, Title } from "@mantine/core";
 import { LatestReading } from "../LatestReading";
-import { ReadingsOverview } from "../ReadingsOverview";
 import { ColorSchemeSwitcher } from "../ColorSchemeSwitcher";
 import classes from "./DashboardContainer.module.css";
 
@@ -27,9 +26,7 @@ export const DashboardContainer = () => {
         </Accordion.Item>
         <Accordion.Item key="overview" value="overview">
           <Accordion.Control>Overview</Accordion.Control>
-          <Accordion.Panel>
-            <ReadingsOverview />
-          </Accordion.Panel>
+          <Accordion.Panel></Accordion.Panel>
         </Accordion.Item>
       </Accordion>
     </Box>
