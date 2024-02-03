@@ -31,7 +31,6 @@ export interface FormattedReading {
 }
 
 export interface ReadingLabels {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: ReadingLabel;
   pressure: ReadingLabel;
   rain: ReadingLabel;
@@ -47,4 +46,9 @@ export type ReadingLabel = {
   label: string;
   color?: DefaultMantineColor;
   unit: string;
+};
+
+export type IndividualReadingData = {
+  timestamp: string;
+  [key: string]: number | string;
 };

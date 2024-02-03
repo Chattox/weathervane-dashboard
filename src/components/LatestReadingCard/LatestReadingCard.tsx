@@ -19,8 +19,6 @@ export const LatestReadingCard = (props: {
     ? COMPASS_DIRECTIONS[props.reading]
     : props.reading;
 
-  console.log(colorScheme);
-
   const rootClass = colorScheme === "dark" ? classes.rootDark : "";
 
   return (
