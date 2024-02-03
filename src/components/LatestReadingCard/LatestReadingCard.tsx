@@ -1,10 +1,4 @@
-import {
-  Group,
-  Paper,
-  Stack,
-  Text,
-  useComputedColorScheme,
-} from "@mantine/core";
+import { Group, Paper, Stack, Text } from "@mantine/core";
 import { COMPASS_DIRECTIONS, READINGS_LABELS } from "../../consts";
 import classes from "./LatestReadingCard.module.css";
 
@@ -12,14 +6,11 @@ export const LatestReadingCard = (props: {
   measurement: string;
   reading: number;
 }) => {
-  const colorScheme = useComputedColorScheme("light");
   const { label, unit, color } = READINGS_LABELS[props.measurement];
   const isWindDir = props.measurement === "wind_direction";
   const readingDisplay = isWindDir
     ? COMPASS_DIRECTIONS[props.reading]
     : props.reading;
-
-  const rootClass = colorScheme === "dark" ? classes.rootDark : "";
 
   return (
     <Paper
@@ -28,7 +19,7 @@ export const LatestReadingCard = (props: {
       shadow="xs"
       p="sm"
       classNames={{
-        root: rootClass,
+        root: classes.root,
       }}
     >
       <Stack h="100%" justify="flex-start" ta="center">

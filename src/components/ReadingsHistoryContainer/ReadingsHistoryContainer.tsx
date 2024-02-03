@@ -3,13 +3,7 @@ import { FormattedReading, IndividualReadingData } from "../../types/global";
 import { getAllReadings } from "../../utils/api";
 import { formatReadings } from "../../utils/formatReadings";
 import { READINGS_LABELS } from "../../consts";
-import {
-  Grid,
-  Paper,
-  Stack,
-  Text,
-  useComputedColorScheme,
-} from "@mantine/core";
+import { Grid, Paper, Stack, Text } from "@mantine/core";
 import classes from "./ReadingsHistoryContainer.module.css";
 import { ReadingAreaChart } from "../charts/ReadingAreaChart";
 import { getIndividualReadingHistory } from "../../utils/getIndividualReadingHistory";
@@ -18,8 +12,6 @@ import { ReadingBarChart } from "../charts/ReadingBarChart";
 export const ReadingsHistoryContainer = () => {
   const [readings, setReadings] = useState<FormattedReading[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const colorScheme = useComputedColorScheme("light");
-  const rootClass = colorScheme === "dark" ? classes.rootDark : "";
 
   useEffect(() => {
     getAllReadings().then((res) => {
@@ -55,7 +47,7 @@ export const ReadingsHistoryContainer = () => {
       const data = getIndividualReadingHistory(readings, measurement);
       return (
         <Grid.Col span={3} key={READINGS_LABELS[measurement].label}>
-          <Paper shadow="xs" p="sm" classNames={{ root: rootClass }}>
+          <Paper shadow="xs" p="sm" classNames={{ root: classes.root }}>
             <Stack h="100%" justify="flex-start">
               <Text size="lg" fw={500} pl={16}>
                 {READINGS_LABELS[measurement].label}

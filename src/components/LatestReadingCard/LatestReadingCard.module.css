@@ -1,3 +1,7 @@
-.rootDark {
-  background-color: var(--mantine-color-wGrey-8);
+.root {
+  background-color: inherit;
+
+  @mixin dark {
+    background-color: var(--mantine-color-wGrey-8);
+  }
 }
