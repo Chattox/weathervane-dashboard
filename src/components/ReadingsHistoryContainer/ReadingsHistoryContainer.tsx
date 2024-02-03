@@ -31,10 +31,12 @@ export const ReadingsHistoryContainer = () => {
     (measurement: string) => {
       const data = getIndividualReadingHistory(readings, measurement);
       return (
-        <Grid.Col span={6} key={READINGS_LABELS[measurement].label}>
+        <Grid.Col span={3} key={READINGS_LABELS[measurement].label}>
           <Paper shadow="xs" p="sm" classNames={{ root: rootClass }}>
-            <Stack h="100%" justify="flex-start" ta="center">
-              <Text size="lg">{READINGS_LABELS[measurement].label}</Text>
+            <Stack h="100%" justify="flex-start">
+              <Text size="lg" fw={500} pl={16}>
+                {READINGS_LABELS[measurement].label}
+              </Text>
               <ReadingAreaChart data={data} measurement={measurement} />
             </Stack>
           </Paper>
