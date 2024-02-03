@@ -6,18 +6,19 @@ import {
   RadialLinearScale,
   Tooltip,
 } from "chart.js";
-import { WindData } from "../../../types/global";
+import { Center, Stack } from "@mantine/core";
 
-export const ReadingWindRose = (props: { data: WindData }) => {
+export const ReadingWindRose = (props: { data: number[] }) => {
   ChartJS.register(RadialLinearScale, ArcElement, Tooltip, Legend);
+  console.log(props.data);
   const data = {
-    labels: ["Red", "Green", "Yellow", "Grey", "Blue", "f", "g", "h"],
+    labels: ["N", "NW", "W", "SW", "S", "SE", "E", "NE"],
     datasets: [
       {
         label: "My First Dataset",
-        data: [11, 16, 7, 3, 14, 20, 12, 6],
+        data: props.data,
         backgroundColor: [
-          "rgb(255, 99, 132)",
+          "var(--mantine-color-wGreen-4)",
           "rgb(75, 192, 192)",
           "rgb(255, 205, 86)",
           "rgb(201, 203, 207)",
@@ -28,20 +29,26 @@ export const ReadingWindRose = (props: { data: WindData }) => {
   };
 
   return (
-    <PolarArea
-      data={data}
-      options={{
-        scales: {
-          r: {
-            startAngle: 22.5,
+    <Center mah="22.75rem">
+      <PolarArea
+        data={data}
+        options={{
+          responsive: true,
+          scales: {
+            r: {
+              startAngle: 337.5,
+            },
           },
-        },
-        elements: {
-          arc: {
-            angle: 45,
+          plugins: {
+            tooltip: {
+              enabled: false,
+            },
+            legend: {
+              display: false,
+            },
           },
-        },
-      }}
-    />
+        }}
+      />
+    </Center>
   );
 };
