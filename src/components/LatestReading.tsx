@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { FormattedReading } from "../types/global";
 import { getLatestReading } from "../utils/api";
 import { formatReadings } from "../utils/formatReadings";
-import { Grid, Title } from "@mantine/core";
+import { Group, Stack, Text } from "@mantine/core";
 import { READINGS_LABELS } from "../consts";
+import { LatestReadingCard } from "./LatestReadingCard/LatestReadingCard";
 
 export const LatestReading = () => {
   const [latestReading, setLatestReading] = useState<FormattedReading>();
@@ -18,15 +19,26 @@ export const LatestReading = () => {
 
   const readingData = Object.keys(READINGS_LABELS).map(
     (measurement: string) => (
-      <Grid.Col span={6} key={READINGS_LABELS[measurement].label}>
-        <Title order={5}>{READINGS_LABELS[measurement].label}</Title>
-        <p>
-          {latestReading?.[measurement]}
-          {READINGS_LABELS[measurement].unit}
-        </p>
-      </Grid.Col>
+      <LatestReadingCard
+        measurement={measurement}
+        reading={latestReading?.[measurement] as number}
+        key={READINGS_LABELS[measurement].label}
+      />
     )
   );
 
-  return <>{loading ? <p>Loading...</p> : <Grid>{readingData}</Grid>}</>;
+  return (
+    <>
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <Stack>
+          <Text fw={500}>Latest reading: {latestReading?.timestamp}</Text>
+          <Group w="100%" gap="xs" grow>
+            {readingData}
+          </Group>
+        </Stack>
+      )}
+    </>
+  );
 };
