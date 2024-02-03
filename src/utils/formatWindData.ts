@@ -1,8 +1,8 @@
 import { COMPASS_DIRECTIONS } from "../consts";
-import { FormattedReading } from "../types/global";
+import { FormattedReading, WindData } from "../types/global";
 
-export const formatWindData = (readings: FormattedReading[]): number[] => {
-  const windData: Record<string, number> = {
+export const formatWindData = (readings: FormattedReading[]): WindData[] => {
+  const windCount: Record<string, number> = {
     n: 0,
     nw: 0,
     w: 0,
@@ -15,11 +15,15 @@ export const formatWindData = (readings: FormattedReading[]): number[] => {
 
   readings.forEach(
     (reading: FormattedReading) =>
-      (windData[COMPASS_DIRECTIONS[reading.wind_direction].toLowerCase()] +=
+      (windCount[COMPASS_DIRECTIONS[reading.wind_direction].toLowerCase()] +=
         reading.wind_speed)
   );
 
-  console.log(windData);
+  const windData: WindData[] = Object.keys(windCount).map(
+    (dir: string): WindData => {
+      return { dir: dir.toUpperCase(), amount: windCount[dir] };
+    }
+  );
 
-  return Object.values(windData);
+  return windData;
 };

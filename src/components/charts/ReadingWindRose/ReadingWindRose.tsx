@@ -1,54 +1,39 @@
-import { PolarArea } from "react-chartjs-2";
+import { Center } from "@mantine/core";
 import {
-  ArcElement,
-  Chart as ChartJS,
-  Legend,
-  RadialLinearScale,
-  Tooltip,
-} from "chart.js";
-import { Center, Stack } from "@mantine/core";
+  PolarAngleAxis,
+  PolarGrid,
+  PolarRadiusAxis,
+  Radar,
+  RadarChart,
+} from "recharts";
 
-export const ReadingWindRose = (props: { data: number[] }) => {
-  ChartJS.register(RadialLinearScale, ArcElement, Tooltip, Legend);
+export const ReadingWindRose = (props: { data: WindData[] }) => {
+  const data = [
+    { dir: "N", speed: 10 },
+    { dir: "NE", speed: 5 },
+    { dir: "E", speed: 6 },
+    { dir: "SE", speed: 2.75 },
+    { dir: "S", speed: 3 },
+    { dir: "SW", speed: 4 },
+    { dir: "W", speed: 7 },
+    { dir: "NW", speed: 12 },
+  ];
+
   console.log(props.data);
-  const data = {
-    labels: ["N", "NW", "W", "SW", "S", "SE", "E", "NE"],
-    datasets: [
-      {
-        label: "My First Dataset",
-        data: props.data,
-        backgroundColor: [
-          "var(--mantine-color-wGreen-4)",
-          "rgb(75, 192, 192)",
-          "rgb(255, 205, 86)",
-          "rgb(201, 203, 207)",
-          "rgb(54, 162, 235)",
-        ],
-      },
-    ],
-  };
 
   return (
-    <Center mah="22.75rem">
-      <PolarArea
-        data={data}
-        options={{
-          responsive: true,
-          scales: {
-            r: {
-              startAngle: 337.5,
-            },
-          },
-          plugins: {
-            tooltip: {
-              enabled: false,
-            },
-            legend: {
-              display: false,
-            },
-          },
-        }}
-      />
+    <Center>
+      <RadarChart width={364} height={364} outerRadius="80%" data={props.data}>
+        <PolarGrid />
+        <PolarAngleAxis dataKey="dir" />
+        <PolarRadiusAxis tick={false} />
+        <Radar
+          dataKey="amount"
+          stroke="var(--mantine-color-wGrey-4)"
+          fill="var(--mantine-color-wGrey-4)"
+          fillOpacity={0.6}
+        />
+      </RadarChart>
     </Center>
   );
 };
