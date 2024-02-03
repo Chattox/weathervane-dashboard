@@ -27,7 +27,9 @@ export const DashboardContainer = () => {
         </Accordion.Item>
         <Accordion.Item key="overview" value="overview">
           <Accordion.Control>Overview</Accordion.Control>
-          <Accordion.Panel>{/* <ReadingsOverview /> */}</Accordion.Panel>
+          <Accordion.Panel>
+            <ReadingsOverview />
+          </Accordion.Panel>
         </Accordion.Item>
       </Accordion>
     </Box>

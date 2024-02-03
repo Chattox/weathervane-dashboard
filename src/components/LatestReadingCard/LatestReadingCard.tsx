@@ -29,7 +29,6 @@ export const LatestReadingCard = (props: {
       miw={275}
       shadow="xs"
       p="sm"
-      withBorder
       classNames={{
         root: rootClass,
       }}
