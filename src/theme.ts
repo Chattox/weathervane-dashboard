@@ -45,7 +45,7 @@ const wGrey: MantineColorsTuple = [
   "#0e0e13",
 ];
 
-type ExtendedColors = "wGreen" | "wBlue" | DefaultMantineColor;
+type ExtendedColors = "wGreen" | "wBlue" | "wGrey" | DefaultMantineColor;
 
 declare module "@mantine/core" {
   export interface MantineThemeColorsOverride {

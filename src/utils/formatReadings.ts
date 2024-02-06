@@ -1,15 +1,11 @@
 import { ApiReading, FormattedReading } from "../types/global";
+import { round } from "./round";
 
 export const formatReadings = (readings: ApiReading[]): FormattedReading[] => {
   return readings.map((reading: ApiReading): FormattedReading => {
     const formattedTimestamp = new Date(reading.timestamp).toLocaleString(
       "en-GB"
     );
-
-    const round = (n: number, d: number): number => {
-      const precis = Math.pow(10, d);
-      return Math.round(n * precis) / precis;
-    };
 
     return {
       timestamp: formattedTimestamp,
