@@ -14,6 +14,7 @@ export const ReadingWindRose = (props: { data: WindData[] }) => {
           fill="var(--mantine-color-wGrey-4)"
           fillOpacity={0.6}
           strokeWidth={2}
+          isAnimationActive={false}
         />
       </RadarChart>
     </Center>
