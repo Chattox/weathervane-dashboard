@@ -1,37 +1,19 @@
 import { Center } from "@mantine/core";
-import {
-  PolarAngleAxis,
-  PolarGrid,
-  PolarRadiusAxis,
-  Radar,
-  RadarChart,
-} from "recharts";
+import { PolarAngleAxis, PolarGrid, Radar, RadarChart } from "recharts";
+import { WindData } from "../../../types/global";
 
 export const ReadingWindRose = (props: { data: WindData[] }) => {
-  const data = [
-    { dir: "N", speed: 10 },
-    { dir: "NE", speed: 5 },
-    { dir: "E", speed: 6 },
-    { dir: "SE", speed: 2.75 },
-    { dir: "S", speed: 3 },
-    { dir: "SW", speed: 4 },
-    { dir: "W", speed: 7 },
-    { dir: "NW", speed: 12 },
-  ];
-
-  console.log(props.data);
-
   return (
     <Center>
       <RadarChart width={364} height={364} outerRadius="80%" data={props.data}>
-        <PolarGrid />
-        <PolarAngleAxis dataKey="dir" />
-        <PolarRadiusAxis tick={false} />
+        <PolarGrid strokeOpacity={0.3} stroke="#c9c9c9" strokeDasharray="5 5" />
+        <PolarAngleAxis dataKey="dir" stroke="#828282" strokeOpacity={0} />
         <Radar
           dataKey="amount"
           stroke="var(--mantine-color-wGrey-4)"
           fill="var(--mantine-color-wGrey-4)"
           fillOpacity={0.6}
+          strokeWidth={2}
         />
       </RadarChart>
     </Center>
