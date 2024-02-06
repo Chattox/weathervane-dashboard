@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
 import { FormattedReading, IndividualReadingData } from "../../types/global";
-import { getAllReadings } from "../../utils/api";
-import { formatReadings } from "../../utils/formatReadings";
+import {
+  getAllReadings,
+  formatReadings,
+  getIndividualReadingHistory,
+  formatWindData,
+} from "../../utils";
 import { READINGS_LABELS } from "../../consts";
 import { Grid, Paper, Stack, Text } from "@mantine/core";
 import classes from "./ReadingsHistoryContainer.module.css";
 import { ReadingAreaChart } from "../charts/ReadingAreaChart";
-import { getIndividualReadingHistory } from "../../utils/getIndividualReadingHistory";
 import { ReadingBarChart } from "../charts/ReadingBarChart";
-import { formatWindData } from "../../utils/formatWindData";
 import { ReadingWindRose } from "../charts/ReadingWindRose";
 
 export const ReadingsHistoryContainer = () => {

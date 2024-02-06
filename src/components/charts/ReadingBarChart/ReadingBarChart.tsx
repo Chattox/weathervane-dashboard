@@ -1,8 +1,9 @@
 import { BarChart } from "@mantine/charts";
-import { READINGS_LABELS } from "../../../consts";
+import { MAX_DATA_POINTS, READINGS_LABELS } from "../../../consts";
 import { IndividualReadingData } from "../../../types/global";
 import { Stack } from "@mantine/core";
 import { ChartMinMax } from "../ChartLegend";
+import { downsampleData, formatTimestamps } from "../../../utils";
 
 export const ReadingBarChart = (props: {
   data: IndividualReadingData[];
@@ -10,11 +11,18 @@ export const ReadingBarChart = (props: {
 }) => {
   const readingInfo = READINGS_LABELS[props.measurement];
 
+  const chartData =
+    props.data.length > MAX_DATA_POINTS
+      ? formatTimestamps(
+          downsampleData(props.data, props.measurement),
+          props.measurement
+        )
+      : formatTimestamps(props.data, props.measurement);
   return (
     <Stack align="flex-end">
       <BarChart
         h={300}
-        data={props.data}
+        data={chartData}
         dataKey="timestamp"
         unit={readingInfo.unit}
         yAxisProps={{ domain: ["auto", "auto"], width: 70 }}

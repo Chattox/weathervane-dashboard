@@ -3,12 +3,8 @@ import { round } from "./round";
 
 export const formatReadings = (readings: ApiReading[]): FormattedReading[] => {
   return readings.map((reading: ApiReading): FormattedReading => {
-    const formattedTimestamp = new Date(reading.timestamp).toLocaleString(
-      "en-GB"
-    );
-
     return {
-      timestamp: formattedTimestamp,
+      timestamp: reading.timestamp,
       pressure: reading.readings.pressure,
       rain: round(reading.readings.rain, 2),
       wind_speed: round(reading.readings.wind_speed, 2),

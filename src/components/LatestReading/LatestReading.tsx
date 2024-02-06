@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { FormattedReading } from "../../types/global";
-import { getLatestReading } from "../../utils/api";
-import { formatReadings } from "../../utils/formatReadings";
+import { getLatestReading, formatReadings } from "../../utils";
 import { Group, Stack, Text } from "@mantine/core";
 import { READINGS_LABELS } from "../../consts";
 import { LatestReadingCard } from "../LatestReadingCard";
