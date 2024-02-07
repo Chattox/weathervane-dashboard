@@ -10,12 +10,13 @@ import {
   formatWindData,
 } from "../../utils";
 import { READINGS_LABELS } from "../../consts";
-import { Grid, Paper, SegmentedControl, Stack, Text } from "@mantine/core";
+import { Grid, Paper, Stack, Text } from "@mantine/core";
 import classes from "./ReadingsHistoryContainer.module.css";
 import { ReadingAreaChart } from "../charts/ReadingAreaChart";
 import { ReadingBarChart } from "../charts/ReadingBarChart";
 import { ReadingWindRose } from "../charts/ReadingWindRose";
 import { getReadingsInDateRange } from "../../utils/getReadingsInDateRange";
+import { DateRangePicker } from "../DateRangePicker";
 
 export const ReadingsHistoryContainer = () => {
   const [readings, setReadings] = useState<FormattedReadingRanges>({
@@ -95,19 +96,7 @@ export const ReadingsHistoryContainer = () => {
         <p>Loading</p>
       ) : (
         <Stack align="flex-start">
-          <SegmentedControl
-            value={range}
-            onChange={setRange}
-            data={[
-              { label: "24hr", value: "day" },
-              { label: "Week", value: "week" },
-              { label: "Month", value: "month" },
-              { label: "Year", value: "year" },
-              { label: "All", value: "all" },
-            ]}
-            withItemsBorders={false}
-            classNames={{ root: classes.root }}
-          />
+          <DateRangePicker value={range} onChange={setRange} />
           <Grid>{historyDisplays}</Grid>
         </Stack>
       )}
