@@ -26,3 +26,5 @@ export const COMPASS_DIRECTIONS: Record<number, string> = {
   315: "NW",
   360: "N",
 };
+
+export const MAX_DATA_POINTS: number = 2500;

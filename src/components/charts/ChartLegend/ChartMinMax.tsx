@@ -1,7 +1,7 @@
 import { Table } from "@mantine/core";
 import { IndividualReadingData } from "../../../types/global";
 import { READINGS_LABELS } from "../../../consts";
-import { round } from "../../../utils/round";
+import { round } from "../../../utils";
 import classes from "./ChartMinMax.module.css";
 
 export const ChartMinMax = (props: {
