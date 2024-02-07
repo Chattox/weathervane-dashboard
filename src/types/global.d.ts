@@ -31,6 +31,7 @@ export interface FormattedReading {
 }
 
 export interface FormattedReadingRanges {
+  [key: string]: FormattedReadingp[];
   day: FormattedReading[];
   week: FormattedReading[];
   month: FormattedReading[];

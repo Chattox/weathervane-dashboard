@@ -10,7 +10,7 @@ import {
   formatWindData,
 } from "../../utils";
 import { READINGS_LABELS } from "../../consts";
-import { Grid, Paper, Stack, Text } from "@mantine/core";
+import { Grid, Paper, SegmentedControl, Stack, Text } from "@mantine/core";
 import classes from "./ReadingsHistoryContainer.module.css";
 import { ReadingAreaChart } from "../charts/ReadingAreaChart";
 import { ReadingBarChart } from "../charts/ReadingBarChart";
@@ -27,6 +27,7 @@ export const ReadingsHistoryContainer = () => {
     custom: [],
   });
   const [loading, setLoading] = useState<boolean>(true);
+  const [range, setRange] = useState<string>("day");
 
   useEffect(() => {
     getAllReadings().then((res) => {
@@ -39,6 +40,7 @@ export const ReadingsHistoryContainer = () => {
         all: formattedReadings,
         custom: [],
       };
+
       setReadings(readingsRanges);
 
       setLoading(false);
@@ -63,7 +65,7 @@ export const ReadingsHistoryContainer = () => {
       case "bar":
         return <ReadingBarChart data={data} measurement={measurement} />;
       case "windRose":
-        return <ReadingWindRose data={formatWindData(readings.all)} />;
+        return <ReadingWindRose data={formatWindData(readings[range])} />;
       default:
         return undefined;
     }
@@ -71,7 +73,7 @@ export const ReadingsHistoryContainer = () => {
 
   const historyDisplays = Object.keys(READINGS_LABELS).map(
     (measurement: string) => {
-      const data = getIndividualReadingHistory(readings.all, measurement);
+      const data = getIndividualReadingHistory(readings[range], measurement);
       return (
         <Grid.Col span={3} key={READINGS_LABELS[measurement].label}>
           <Paper shadow="xs" p="sm" classNames={{ root: classes.root }}>
@@ -87,5 +89,28 @@ export const ReadingsHistoryContainer = () => {
     }
   );
 
-  return <>{loading ? <p>Loading</p> : <Grid>{historyDisplays}</Grid>}</>;
+  return (
+    <>
+      {loading ? (
+        <p>Loading</p>
+      ) : (
+        <Stack align="flex-start">
+          <SegmentedControl
+            value={range}
+            onChange={setRange}
+            data={[
+              { label: "24hr", value: "day" },
+              { label: "Week", value: "week" },
+              { label: "Month", value: "month" },
+              { label: "Year", value: "year" },
+              { label: "All", value: "all" },
+            ]}
+            withItemsBorders={false}
+            classNames={{ root: classes.root }}
+          />
+          <Grid>{historyDisplays}</Grid>
+        </Stack>
+      )}
+    </>
+  );
 };
