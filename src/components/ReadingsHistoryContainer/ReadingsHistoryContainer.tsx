@@ -29,6 +29,7 @@ export const ReadingsHistoryContainer = () => {
   });
   const [loading, setLoading] = useState<boolean>(true);
   const [range, setRange] = useState<string>("day");
+  const [customRange, setCustomRange] = useState<string[]>([]);
 
   useEffect(() => {
     getAllReadings().then((res) => {
@@ -96,7 +97,12 @@ export const ReadingsHistoryContainer = () => {
         <p>Loading</p>
       ) : (
         <Stack align="flex-start">
-          <DateRangePicker value={range} onChange={setRange} />
+          <DateRangePicker
+            value={range}
+            onChange={setRange}
+            dateRange={customRange}
+            setDateRange={setCustomRange}
+          />
           <Grid>{historyDisplays}</Grid>
         </Stack>
       )}

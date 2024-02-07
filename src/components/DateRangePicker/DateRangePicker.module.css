@@ -5,3 +5,7 @@
     background-color: var(--mantine-color-wGrey-8);
   }
 }
+
+.dropdown {
+  padding: 0px;
+}
