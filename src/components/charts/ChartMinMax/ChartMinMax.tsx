@@ -8,16 +8,14 @@ export const ChartMinMax = (props: {
   data: IndividualReadingData[];
   measurement: string;
 }) => {
-  const sortedReadings = props.data
-    .map(
-      (reading: IndividualReadingData) => reading[props.measurement] as number
-    )
-    .sort();
+  const readingsNumbers = props.data.map(
+    (reading: IndividualReadingData) => reading[props.measurement] as number
+  );
 
-  const minReading = sortedReadings[0];
-  const maxReading = sortedReadings.at(-1);
+  const minReading = Math.min(...readingsNumbers);
+  const maxReading = Math.max(...readingsNumbers);
   const average = round(
-    sortedReadings.reduce((p, c) => p + c) / sortedReadings.length,
+    readingsNumbers.reduce((p, c) => p + c) / readingsNumbers.length,
     2
   );
 
