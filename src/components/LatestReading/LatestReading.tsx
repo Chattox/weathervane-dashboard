@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import { FormattedReading } from "../../types/global";
-import { getLatestReading, formatReadings } from "../../utils";
+import {
+  getLatestReading,
+  formatReadings,
+  formatSingleTimestamp,
+} from "../../utils";
 import { Group, Stack, Text } from "@mantine/core";
 import { READINGS_LABELS } from "../../consts";
 import { LatestReadingCard } from "../LatestReadingCard";
@@ -32,7 +36,9 @@ export const LatestReading = () => {
         <p>Loading...</p>
       ) : (
         <Stack>
-          <Text fw={500}>Latest reading: {latestReading?.timestamp}</Text>
+          <Text fw={500}>
+            Latest reading: {formatSingleTimestamp(latestReading!.timestamp)}
+          </Text>
           <Group w="100%" gap="xs" grow>
             {readingData}
           </Group>

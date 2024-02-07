@@ -9,3 +9,7 @@ export const formatTimestamps = (
     [measurement]: reading[measurement],
   }));
 };
+
+export const formatSingleTimestamp = (timeStr: string): string => {
+  return new Date(timeStr).toLocaleString("en-GB");
+};
