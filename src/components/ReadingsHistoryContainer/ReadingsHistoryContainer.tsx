@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
-import { FormattedReading, IndividualReadingData } from "../../types/global";
+import {
+  FormattedReadingRanges,
+  IndividualReadingData,
+} from "../../types/global";
 import {
   getAllReadings,
   formatReadings,
@@ -12,14 +15,32 @@ import classes from "./ReadingsHistoryContainer.module.css";
 import { ReadingAreaChart } from "../charts/ReadingAreaChart";
 import { ReadingBarChart } from "../charts/ReadingBarChart";
 import { ReadingWindRose } from "../charts/ReadingWindRose";
+import { getReadingsInDateRange } from "../../utils/getReadingsInDateRange";
 
 export const ReadingsHistoryContainer = () => {
-  const [readings, setReadings] = useState<FormattedReading[]>([]);
+  const [readings, setReadings] = useState<FormattedReadingRanges>({
+    day: [],
+    week: [],
+    month: [],
+    year: [],
+    all: [],
+    custom: [],
+  });
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     getAllReadings().then((res) => {
-      setReadings(formatReadings(res));
+      const formattedReadings = formatReadings(res);
+      const readingsRanges: FormattedReadingRanges = {
+        day: getReadingsInDateRange(formattedReadings, { period: "day" }),
+        week: getReadingsInDateRange(formattedReadings, { period: "week" }),
+        month: getReadingsInDateRange(formattedReadings, { period: "month" }),
+        year: getReadingsInDateRange(formattedReadings, { period: "year" }),
+        all: formattedReadings,
+        custom: [],
+      };
+      setReadings(readingsRanges);
+
       setLoading(false);
     });
   }, []);
@@ -42,7 +63,7 @@ export const ReadingsHistoryContainer = () => {
       case "bar":
         return <ReadingBarChart data={data} measurement={measurement} />;
       case "windRose":
-        return <ReadingWindRose data={formatWindData(readings)} />;
+        return <ReadingWindRose data={formatWindData(readings.all)} />;
       default:
         return undefined;
     }
@@ -50,7 +71,7 @@ export const ReadingsHistoryContainer = () => {
 
   const historyDisplays = Object.keys(READINGS_LABELS).map(
     (measurement: string) => {
-      const data = getIndividualReadingHistory(readings, measurement);
+      const data = getIndividualReadingHistory(readings.all, measurement);
       return (
         <Grid.Col span={3} key={READINGS_LABELS[measurement].label}>
           <Paper shadow="xs" p="sm" classNames={{ root: classes.root }}>

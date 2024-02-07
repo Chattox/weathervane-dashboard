@@ -30,6 +30,15 @@ export interface FormattedReading {
   luminance: number;
 }
 
+export interface FormattedReadingRanges {
+  day: FormattedReading[];
+  week: FormattedReading[];
+  month: FormattedReading[];
+  year: FormattedReading[];
+  all: FormattedReading[];
+  custom: FormattedReading[];
+}
+
 export interface ReadingLabels {
   [key: string]: ReadingLabel;
   pressure: ReadingLabel;
