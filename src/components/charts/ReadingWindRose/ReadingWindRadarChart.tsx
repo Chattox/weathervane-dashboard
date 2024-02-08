@@ -2,7 +2,7 @@ import { Center } from "@mantine/core";
 import { PolarAngleAxis, PolarGrid, Radar, RadarChart } from "recharts";
 import { WindData } from "../../../types/global";
 
-export const ReadingWindRose = (props: { data: WindData[] }) => {
+export const ReadingWindRadarChart = (props: { data: WindData[] }) => {
   return (
     <Center>
       <RadarChart width={364} height={364} outerRadius="80%" data={props.data}>
