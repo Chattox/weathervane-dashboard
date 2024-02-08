@@ -14,7 +14,7 @@ import { Grid, Paper, Stack, Text } from "@mantine/core";
 import classes from "./ReadingsHistoryContainer.module.css";
 import { ReadingAreaChart } from "../charts/ReadingAreaChart";
 import { ReadingBarChart } from "../charts/ReadingBarChart";
-import { ReadingWindRose } from "../charts/ReadingWindRose";
+import { ReadingWindRadarChart } from "../charts/ReadingWindRose";
 import { getReadingsInDateRange } from "../../utils/getReadingsInDateRange";
 import { DateRangePicker } from "../DateRangePicker";
 
@@ -45,6 +45,10 @@ export const ReadingsHistoryContainer = () => {
 
       setReadings(readingsRanges);
 
+      readings.day.forEach((reading) =>
+        console.log(`${reading.timestamp}: ${reading.wind_direction}`)
+      );
+
       setLoading(false);
     });
   }, []);
@@ -67,7 +71,7 @@ export const ReadingsHistoryContainer = () => {
       case "bar":
         return <ReadingBarChart data={data} measurement={measurement} />;
       case "windRose":
-        return <ReadingWindRose data={formatWindData(readings[range])} />;
+        return <ReadingWindRadarChart data={formatWindData(readings[range])} />;
       default:
         return undefined;
     }

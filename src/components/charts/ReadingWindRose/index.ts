@@ -1,1 +1,1 @@
-export { ReadingWindRose } from "./ReadingWindRose";
+export * from "./ReadingWindRadarChart";
