@@ -1,6 +1,7 @@
 import React from "react";
-import { Button, Group, Popover, SegmentedControl, Text } from "@mantine/core";
+import { Button, Group, Popover, SegmentedControl } from "@mantine/core";
 import classes from "./DateRangePicker.module.css";
+import { IconChevronDown } from "@tabler/icons-react";
 
 export const DateRangePicker = (props: {
   value: string;
@@ -8,6 +9,14 @@ export const DateRangePicker = (props: {
   dateRange: string[];
   setDateRange: React.Dispatch<React.SetStateAction<string[]>>;
 }) => {
+  const controlSegmentDict: Record<string, string> = {
+    day: "24hr",
+    week: "Week",
+    month: "Month",
+    year: "Year",
+    all: "All",
+  };
+
   return (
     <Popover
       position="bottom-start"
@@ -15,7 +24,13 @@ export const DateRangePicker = (props: {
       classNames={{ dropdown: classes.dropdown }}
     >
       <Popover.Target>
-        <Button>{props.value}</Button>
+        <Button
+          radius="sm"
+          classNames={{ root: classes.buttonRoot }}
+          rightSection={<IconChevronDown size={16} />}
+        >
+          {controlSegmentDict[props.value]}
+        </Button>
       </Popover.Target>
       <Popover.Dropdown>
         <Group>

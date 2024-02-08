@@ -45,10 +45,6 @@ export const ReadingsHistoryContainer = () => {
 
       setReadings(readingsRanges);
 
-      readings.day.forEach((reading) =>
-        console.log(`${reading.timestamp}: ${reading.wind_direction}`)
-      );
-
       setLoading(false);
     });
   }, []);

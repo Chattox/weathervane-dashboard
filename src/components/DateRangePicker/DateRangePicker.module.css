@@ -6,6 +6,21 @@
   }
 }
 
+.buttonRoot {
+  background-color: var(--mantine-color-gray-0);
+  color: inherit;
+
+  @mixin dark {
+    background-color: var(--mantine-color-wGrey-8);
+    color: inherit;
+  }
+}
+
 .dropdown {
   padding: 0px;
+  border: none;
+
+  @mixin dark {
+    border: 1px solid var(--mantine-color-gray-9);
+  }
 }
