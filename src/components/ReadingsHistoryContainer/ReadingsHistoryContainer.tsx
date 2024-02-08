@@ -10,7 +10,7 @@ import {
   formatWindData,
 } from "../../utils";
 import { READINGS_LABELS } from "../../consts";
-import { Grid, Paper, Stack, Text } from "@mantine/core";
+import { Center, Grid, Loader, Paper, Stack, Text } from "@mantine/core";
 import classes from "./ReadingsHistoryContainer.module.css";
 import { ReadingAreaChart } from "../charts/ReadingAreaChart";
 import { ReadingBarChart } from "../charts/ReadingBarChart";
@@ -116,7 +116,9 @@ export const ReadingsHistoryContainer = () => {
   return (
     <>
       {loading ? (
-        <p>Loading</p>
+        <Center>
+          <Loader size="xl" />
+        </Center>
       ) : (
         <Stack align="flex-start">
           <DateRangePicker
