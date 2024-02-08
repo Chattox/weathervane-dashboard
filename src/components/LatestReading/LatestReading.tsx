@@ -37,7 +37,10 @@ export const LatestReading = () => {
       ) : (
         <Stack>
           <Text fw={500}>
-            Latest reading: {formatSingleTimestamp(latestReading!.timestamp)}
+            Latest reading:{" "}
+            {latestReading
+              ? formatSingleTimestamp(latestReading.timestamp)
+              : "N/A"}
           </Text>
           <Group w="100%" gap="xs" grow>
             {readingData}

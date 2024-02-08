@@ -5,3 +5,8 @@
     background-color: var(--mantine-color-wGrey-8);
   }
 }
+
+.errorText {
+  font-size: 5rem;
+  color: alpha(var(--mantine-color-red-4), 0.6);
+}

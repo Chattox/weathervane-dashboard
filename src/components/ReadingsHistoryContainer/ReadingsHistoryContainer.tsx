@@ -99,7 +99,13 @@ export const ReadingsHistoryContainer = () => {
               <Text size="lg" fw={500} pl={16}>
                 {READINGS_LABELS[measurement].label}
               </Text>
-              {getChart(data, measurement)}
+              {data.length > 0 ? (
+                getChart(data, measurement)
+              ) : (
+                <Text ta="center" className={classes.errorText}>
+                  No data
+                </Text>
+              )}
             </Stack>
           </Paper>
         </Grid.Col>
@@ -119,7 +125,9 @@ export const ReadingsHistoryContainer = () => {
             dateRange={customRange}
             setDateRange={setCustomRange}
           />
-          <Grid>{historyDisplays}</Grid>
+          <Grid grow w="100%">
+            {historyDisplays}
+          </Grid>
         </Stack>
       )}
     </>
