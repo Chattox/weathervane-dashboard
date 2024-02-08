@@ -47,7 +47,7 @@ export const DateRangePicker = (props: {
           {controlSegmentDict[props.value]}
         </Button>
       </Popover.Target>
-      <Popover.Dropdown>
+      <Popover.Dropdown p="xs">
         <Group>
           <DatePicker
             type="range"

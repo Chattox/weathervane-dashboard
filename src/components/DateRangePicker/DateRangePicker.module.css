@@ -29,7 +29,6 @@
 }
 
 .dropdown {
-  padding: 0px;
   border: none;
 
   @mixin dark {
