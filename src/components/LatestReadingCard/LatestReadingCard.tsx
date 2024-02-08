@@ -25,13 +25,19 @@ export const LatestReadingCard = (props: {
       <Stack h="100%" justify="flex-start" ta="center">
         <Text size="lg">{label}</Text>
         <Group justify="center">
-          <Text size="cardMeasurement" fw={500} c={color}>
-            {readingDisplay}
-          </Text>
-          {isWindDir ? undefined : (
-            <Text size="cardUnit" fw={500} c={color}>
-              {unit}
-            </Text>
+          {props.reading ? (
+            <>
+              <Text size="cardMeasurement" fw={500} c={color}>
+                {readingDisplay}
+              </Text>
+              {isWindDir ? undefined : (
+                <Text size="cardUnit" fw={500} c={color}>
+                  {unit}
+                </Text>
+              )}
+            </>
+          ) : (
+            <Text className={classes.errorText}>No data</Text>
           )}
         </Group>
       </Stack>

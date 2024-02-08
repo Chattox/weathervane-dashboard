@@ -12,9 +12,11 @@
   "dependencies": {
     "@mantine/charts": "^7.5.0",
     "@mantine/core": "^7.5.0",
+    "@mantine/dates": "^7.5.1",
     "@mantine/hooks": "^7.5.0",
     "@tabler/icons-react": "^2.46.0",
     "axios": "^1.6.7",
+    "dayjs": "^1.11.10",
     "downsample": "^1.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

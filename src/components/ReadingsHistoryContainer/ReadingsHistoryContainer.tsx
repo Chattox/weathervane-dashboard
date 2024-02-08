@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
-import { FormattedReading, IndividualReadingData } from "../../types/global";
+import {
+  FormattedReadingRanges,
+  IndividualReadingData,
+} from "../../types/global";
 import {
   getAllReadings,
   formatReadings,
@@ -7,22 +10,60 @@ import {
   formatWindData,
 } from "../../utils";
 import { READINGS_LABELS } from "../../consts";
-import { Grid, Paper, Stack, Text } from "@mantine/core";
+import { Center, Grid, Loader, Paper, Stack, Text } from "@mantine/core";
 import classes from "./ReadingsHistoryContainer.module.css";
 import { ReadingAreaChart } from "../charts/ReadingAreaChart";
 import { ReadingBarChart } from "../charts/ReadingBarChart";
-import { ReadingWindRose } from "../charts/ReadingWindRose";
+import { ReadingWindRadarChart } from "../charts/ReadingWindRose";
+import { getReadingsInDateRange } from "../../utils/getReadingsInDateRange";
+import { DateRangePicker } from "../DateRangePicker";
 
 export const ReadingsHistoryContainer = () => {
-  const [readings, setReadings] = useState<FormattedReading[]>([]);
+  const [readings, setReadings] = useState<FormattedReadingRanges>({
+    day: [],
+    week: [],
+    month: [],
+    year: [],
+    all: [],
+    custom: [],
+  });
   const [loading, setLoading] = useState<boolean>(true);
+  const [range, setRange] = useState<string>("day");
+  const [customRange, setCustomRange] = useState<string[]>([]);
 
   useEffect(() => {
     getAllReadings().then((res) => {
-      setReadings(formatReadings(res));
+      const formattedReadings = formatReadings(res);
+      const readingsRanges: FormattedReadingRanges = {
+        day: getReadingsInDateRange(formattedReadings, { period: "day" }),
+        week: getReadingsInDateRange(formattedReadings, { period: "week" }),
+        month: getReadingsInDateRange(formattedReadings, { period: "month" }),
+        year: getReadingsInDateRange(formattedReadings, { period: "year" }),
+        all: formattedReadings,
+        custom: [],
+      };
+
+      setReadings(readingsRanges);
+
       setLoading(false);
     });
   }, []);
+
+  useEffect(() => {
+    if (!loading) {
+      setLoading(true);
+      setReadings({
+        ...readings,
+        custom: getReadingsInDateRange(readings.all, {
+          start: customRange[0],
+          end: customRange[1],
+        }),
+      });
+      setLoading(false);
+      setRange("custom");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [customRange]);
 
   const chartTypes: Record<string, string> = {
     pressure: "area",
@@ -42,7 +83,7 @@ export const ReadingsHistoryContainer = () => {
       case "bar":
         return <ReadingBarChart data={data} measurement={measurement} />;
       case "windRose":
-        return <ReadingWindRose data={formatWindData(readings)} />;
+        return <ReadingWindRadarChart data={formatWindData(readings[range])} />;
       default:
         return undefined;
     }
@@ -50,7 +91,7 @@ export const ReadingsHistoryContainer = () => {
 
   const historyDisplays = Object.keys(READINGS_LABELS).map(
     (measurement: string) => {
-      const data = getIndividualReadingHistory(readings, measurement);
+      const data = getIndividualReadingHistory(readings[range], measurement);
       return (
         <Grid.Col span={3} key={READINGS_LABELS[measurement].label}>
           <Paper shadow="xs" p="sm" classNames={{ root: classes.root }}>
@@ -58,7 +99,13 @@ export const ReadingsHistoryContainer = () => {
               <Text size="lg" fw={500} pl={16}>
                 {READINGS_LABELS[measurement].label}
               </Text>
-              {getChart(data, measurement)}
+              {data.length > 0 ? (
+                getChart(data, measurement)
+              ) : (
+                <Text ta="center" className={classes.errorText}>
+                  No data
+                </Text>
+              )}
             </Stack>
           </Paper>
         </Grid.Col>
@@ -66,5 +113,25 @@ export const ReadingsHistoryContainer = () => {
     }
   );
 
-  return <>{loading ? <p>Loading</p> : <Grid>{historyDisplays}</Grid>}</>;
+  return (
+    <>
+      {loading ? (
+        <Center>
+          <Loader size="xl" />
+        </Center>
+      ) : (
+        <Stack align="flex-start">
+          <DateRangePicker
+            value={range}
+            onChange={setRange}
+            dateRange={customRange}
+            setDateRange={setCustomRange}
+          />
+          <Grid grow w="100%">
+            {historyDisplays}
+          </Grid>
+        </Stack>
+      )}
+    </>
+  );
 };

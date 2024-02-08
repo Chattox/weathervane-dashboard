@@ -2,7 +2,7 @@ import { AreaChart, ChartReferenceLineProps } from "@mantine/charts";
 import { Stack } from "@mantine/core";
 import { IndividualReadingData } from "../../../types/global";
 import { MAX_DATA_POINTS, READINGS_LABELS } from "../../../consts";
-import { ChartMinMax } from "../ChartLegend";
+import { ChartMinMax } from "../ChartMinMax";
 import { formatTimestamps, downsampleData } from "../../../utils";
 
 export const ReadingAreaChart = (props: {

@@ -16,15 +16,15 @@ export const READINGS_LABELS: ReadingLabels = {
 };
 
 export const COMPASS_DIRECTIONS: Record<number, string> = {
-  0: "N",
-  45: "NE",
-  90: "E",
-  135: "SE",
-  180: "S",
-  225: "SW",
-  270: "W",
-  315: "NW",
-  360: "N",
+  0: "S",
+  45: "SW",
+  90: "W",
+  135: "NW",
+  180: "N",
+  225: "NE",
+  270: "E",
+  315: "SE",
+  360: "S",
 };
 
 export const MAX_DATA_POINTS: number = 2500;

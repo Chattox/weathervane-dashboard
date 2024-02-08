@@ -5,7 +5,7 @@ import {
   formatReadings,
   formatSingleTimestamp,
 } from "../../utils";
-import { Group, Stack, Text } from "@mantine/core";
+import { Center, Group, Loader, Stack, Text } from "@mantine/core";
 import { READINGS_LABELS } from "../../consts";
 import { LatestReadingCard } from "../LatestReadingCard";
 
@@ -33,11 +33,16 @@ export const LatestReading = () => {
   return (
     <>
       {loading ? (
-        <p>Loading...</p>
+        <Center>
+          <Loader size="xl" />
+        </Center>
       ) : (
         <Stack>
           <Text fw={500}>
-            Latest reading: {formatSingleTimestamp(latestReading!.timestamp)}
+            Latest reading:{" "}
+            {latestReading
+              ? formatSingleTimestamp(latestReading.timestamp)
+              : "N/A"}
           </Text>
           <Group w="100%" gap="xs" grow>
             {readingData}

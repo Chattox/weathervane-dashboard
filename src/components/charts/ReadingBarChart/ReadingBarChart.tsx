@@ -2,7 +2,7 @@ import { BarChart } from "@mantine/charts";
 import { MAX_DATA_POINTS, READINGS_LABELS } from "../../../consts";
 import { IndividualReadingData } from "../../../types/global";
 import { Stack } from "@mantine/core";
-import { ChartMinMax } from "../ChartLegend";
+import { ChartMinMax } from "../ChartMinMax";
 import { downsampleData, formatTimestamps } from "../../../utils";
 
 export const ReadingBarChart = (props: {
