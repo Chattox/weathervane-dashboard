@@ -49,6 +49,22 @@ export const ReadingsHistoryContainer = () => {
     });
   }, []);
 
+  useEffect(() => {
+    if (!loading) {
+      setLoading(true);
+      setReadings({
+        ...readings,
+        custom: getReadingsInDateRange(readings.all, {
+          start: customRange[0],
+          end: customRange[1],
+        }),
+      });
+      setLoading(false);
+      setRange("custom");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [customRange]);
+
   const chartTypes: Record<string, string> = {
     pressure: "area",
     rain: "bar",
