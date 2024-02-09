@@ -25,7 +25,7 @@ export const LatestReadingCard = (props: {
       <Stack h="100%" justify="flex-start" ta="center">
         <Text size="lg">{label}</Text>
         <Group justify="center">
-          {props.reading ? (
+          {props.reading !== undefined ? (
             <>
               <Text size="cardMeasurement" fw={500} c={color}>
                 {readingDisplay}

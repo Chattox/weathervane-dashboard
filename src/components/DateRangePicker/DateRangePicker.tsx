@@ -62,6 +62,7 @@ export const DateRangePicker = (props: {
               }
             }}
             maxDate={new Date()}
+            allowSingleDateInRange
             classNames={{ day: classes.datePickerDay }}
           />
           <SegmentedControl

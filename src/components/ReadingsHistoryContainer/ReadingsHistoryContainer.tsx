@@ -74,6 +74,7 @@ export const ReadingsHistoryContainer = () => {
     wind_direction: "windRose",
     rain_per_second: "bar",
     luminance: "area",
+    cumulative_rain: "area",
   };
 
   const getChart = (data: IndividualReadingData[], measurement: string) => {
@@ -93,7 +94,7 @@ export const ReadingsHistoryContainer = () => {
     (measurement: string) => {
       const data = getIndividualReadingHistory(readings[range], measurement);
       return (
-        <Grid.Col span={3} key={READINGS_LABELS[measurement].label}>
+        <Grid.Col span={4} key={READINGS_LABELS[measurement].label}>
           <Paper shadow="xs" p="sm" classNames={{ root: classes.root }}>
             <Stack h="100%" justify="flex-start">
               <Text size="lg" fw={500} pl={16}>
@@ -127,9 +128,7 @@ export const ReadingsHistoryContainer = () => {
             dateRange={customRange}
             setDateRange={setCustomRange}
           />
-          <Grid grow w="100%">
-            {historyDisplays}
-          </Grid>
+          <Grid w="100%">{historyDisplays}</Grid>
         </Stack>
       )}
     </>

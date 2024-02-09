@@ -24,7 +24,7 @@ export const ChartMinMax = (props: {
 
   const unit = READINGS_LABELS[props.measurement].unit;
 
-  return (
+  const defaultTable = (
     <Table
       withRowBorders={false}
       classNames={{
@@ -50,4 +50,31 @@ export const ChartMinMax = (props: {
       </Table.Tbody>
     </Table>
   );
+
+  const cumulativeRainTable = (
+    <Table
+      withRowBorders={false}
+      classNames={{
+        table: classes.table,
+        th: classes.th,
+        td: classes.td,
+      }}
+      verticalSpacing={1}
+    >
+      <Table.Thead>
+        <Table.Tr>
+          <Table.Th>total</Table.Th>
+        </Table.Tr>
+      </Table.Thead>
+      <Table.Tbody>
+        <Table.Tr key={props.measurement}>
+          <Table.Td>{`${maxReading}${unit}`}</Table.Td>
+        </Table.Tr>
+      </Table.Tbody>
+    </Table>
+  );
+
+  return props.measurement !== "cumulative_rain"
+    ? defaultTable
+    : cumulativeRainTable;
 };

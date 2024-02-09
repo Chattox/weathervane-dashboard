@@ -20,13 +20,15 @@ export const LatestReading = () => {
     });
   }, []);
 
-  const readingData = Object.keys(READINGS_LABELS).map(
-    (measurement: string) => (
+  const readingData = Object.keys(READINGS_LABELS).map((measurement: string) =>
+    measurement !== "cumulative_rain" ? (
       <LatestReadingCard
         measurement={measurement}
         reading={latestReading?.[measurement] as number}
         key={READINGS_LABELS[measurement].label}
       />
+    ) : (
+      false
     )
   );
 

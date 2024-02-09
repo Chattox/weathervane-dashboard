@@ -13,6 +13,7 @@ export const READINGS_LABELS: ReadingLabels = {
     unit: "mm/s",
   },
   luminance: { label: "Luminance", unit: "lx" },
+  cumulative_rain: { label: "Cumulative rain", unit: "mm" },
 };
 
 export const COMPASS_DIRECTIONS: Record<number, string> = {

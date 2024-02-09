@@ -47,9 +47,10 @@ export interface ReadingLabels {
   wind_speed: ReadingLabel;
   temperature: ReadingLabel;
   humidity: ReadingLabel;
-  wind_direction: ReadingLabel;
   rain_per_second: ReadingLabel;
+  wind_direction: ReadingLabel;
   luminance: ReadingLabel;
+  cumulative_rain: ReadingLabel;
 }
 
 export type ReadingLabel = {
