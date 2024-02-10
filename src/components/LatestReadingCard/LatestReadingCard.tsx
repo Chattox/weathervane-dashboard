@@ -14,24 +14,22 @@ export const LatestReadingCard = (props: {
 
   return (
     <Paper
-      h={150}
-      miw={275}
       shadow="xs"
       p="sm"
       classNames={{
-        root: classes.root,
+        root: classes.cardRoot,
       }}
     >
       <Stack h="100%" justify="flex-start" ta="center">
-        <Text size="lg">{label}</Text>
+        <Text className={classes.label}>{label}</Text>
         <Group justify="center">
           {props.reading !== undefined ? (
             <>
-              <Text size="cardMeasurement" fw={500} c={color}>
+              <Text className={classes.measurement} c={color}>
                 {readingDisplay}
               </Text>
               {isWindDir ? undefined : (
-                <Text size="cardUnit" fw={500} c={color}>
+                <Text className={classes.unit} c={color}>
                   {unit}
                 </Text>
               )}

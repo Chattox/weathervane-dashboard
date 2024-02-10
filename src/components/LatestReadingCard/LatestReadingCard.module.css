@@ -1,9 +1,25 @@
-.root {
+.cardRoot {
   background-color: var(--mantine-color-gray-0);
+  height: 150px;
+  min-width: 275px;
 
   @mixin dark {
     background-color: var(--mantine-color-wGrey-8);
   }
+}
+
+.label {
+  font-size: var(--mantine-font-size-lg);
+}
+
+.measurement {
+  font-size: var(--mantine-font-size-cardMeasurement);
+  font-weight: 500;
+}
+
+.unit {
+  font-size: var(--mantine-font-size-cardUnit);
+  font-weight: 500;
 }
 
 .errorText {
