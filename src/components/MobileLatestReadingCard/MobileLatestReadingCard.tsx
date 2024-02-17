@@ -33,7 +33,7 @@ export const MobileLatestReadingCard = (props: {
               <Text className={classes.errorText}>No data</Text>
             )}
           </Group>
-          {i < arr.length - 2 ? <Divider /> : false}
+          {i < arr.length - 2 ? <Divider my="xs" /> : false}
         </Stack>
       ) : (
         false
@@ -42,7 +42,7 @@ export const MobileLatestReadingCard = (props: {
   );
   return (
     <Paper shadow="xs" p="sm" w="100%" className={classes.cardRoot}>
-      <Stack>{readingDisplay}</Stack>
+      <Stack gap={0}>{readingDisplay}</Stack>
     </Paper>
   );
 };
