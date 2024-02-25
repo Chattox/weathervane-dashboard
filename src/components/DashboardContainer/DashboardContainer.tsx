@@ -17,7 +17,11 @@ export const DashboardContainer = (props: { isMobile: boolean }) => {
         multiple
         defaultValue={["latest", "overview"]}
         chevronPosition="left"
-        classNames={{ item: classes.item, label: classes.label }}
+        classNames={{
+          item: classes.item,
+          label: classes.label,
+          content: props.isMobile ? classes.content : undefined,
+        }}
       >
         <Accordion.Item key="latest" value="latest">
           <Accordion.Control>Current conditions</Accordion.Control>
@@ -28,7 +32,7 @@ export const DashboardContainer = (props: { isMobile: boolean }) => {
         <Accordion.Item key="overview" value="overview">
           <Accordion.Control>History</Accordion.Control>
           <Accordion.Panel>
-            <ReadingsHistoryContainer />
+            <ReadingsHistoryContainer isMobile={props.isMobile} />
           </Accordion.Panel>
         </Accordion.Item>
       </Accordion>

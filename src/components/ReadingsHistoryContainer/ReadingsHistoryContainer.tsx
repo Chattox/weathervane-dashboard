@@ -18,7 +18,7 @@ import { ReadingWindRadarChart } from "../charts/ReadingWindRose";
 import { getReadingsInDateRange } from "../../utils/getReadingsInDateRange";
 import { DateRangePicker } from "../DateRangePicker";
 
-export const ReadingsHistoryContainer = () => {
+export const ReadingsHistoryContainer = (props: { isMobile: boolean }) => {
   const [readings, setReadings] = useState<FormattedReadingRanges>({
     day: [],
     week: [],
@@ -80,11 +80,28 @@ export const ReadingsHistoryContainer = () => {
   const getChart = (data: IndividualReadingData[], measurement: string) => {
     switch (chartTypes[measurement]) {
       case "area":
-        return <ReadingAreaChart data={data} measurement={measurement} />;
+        return (
+          <ReadingAreaChart
+            data={data}
+            measurement={measurement}
+            isMobile={props.isMobile}
+          />
+        );
       case "bar":
-        return <ReadingBarChart data={data} measurement={measurement} />;
+        return (
+          <ReadingBarChart
+            data={data}
+            measurement={measurement}
+            isMobile={props.isMobile}
+          />
+        );
       case "windRose":
-        return <ReadingWindRadarChart data={formatWindData(readings[range])} />;
+        return (
+          <ReadingWindRadarChart
+            data={formatWindData(readings[range])}
+            isMobile={props.isMobile}
+          />
+        );
       default:
         return undefined;
     }
@@ -94,7 +111,10 @@ export const ReadingsHistoryContainer = () => {
     (measurement: string) => {
       const data = getIndividualReadingHistory(readings[range], measurement);
       return (
-        <Grid.Col span={4} key={READINGS_LABELS[measurement].label}>
+        <Grid.Col
+          span={props.isMobile ? 12 : 4}
+          key={READINGS_LABELS[measurement].label}
+        >
           <Paper shadow="xs" p="sm" classNames={{ root: classes.root }}>
             <Stack h="100%" justify="flex-start">
               <Text size="lg" fw={500} pl={16}>

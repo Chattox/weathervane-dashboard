@@ -8,6 +8,7 @@ import { downsampleData, formatTimestamps } from "../../../utils";
 export const ReadingBarChart = (props: {
   data: IndividualReadingData[];
   measurement: string;
+  isMobile: boolean;
 }) => {
   const readingInfo = READINGS_LABELS[props.measurement];
 
@@ -21,7 +22,7 @@ export const ReadingBarChart = (props: {
   return (
     <Stack align="flex-end">
       <BarChart
-        h={300}
+        h={props.isMobile ? 150 : 300}
         data={chartData}
         dataKey="timestamp"
         unit={readingInfo.unit}
