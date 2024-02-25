@@ -28,7 +28,7 @@ export const ReadingBarChart = (props: {
         unit={readingInfo.unit}
         yAxisProps={{
           domain: ["auto", "auto"],
-          width: 70,
+          width: props.measurement === "rain_per_second" ? 80 : 70,
           tickLine: false,
           interval: 0,
         }}
