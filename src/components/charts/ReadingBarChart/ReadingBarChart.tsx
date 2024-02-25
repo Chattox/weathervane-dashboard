@@ -26,7 +26,12 @@ export const ReadingBarChart = (props: {
         data={chartData}
         dataKey="timestamp"
         unit={readingInfo.unit}
-        yAxisProps={{ domain: ["auto", "auto"], width: 70 }}
+        yAxisProps={{
+          domain: ["auto", "auto"],
+          width: 70,
+          tickLine: false,
+          interval: 0,
+        }}
         xAxisProps={{ tick: false }}
         series={[
           {
