@@ -14,7 +14,7 @@ import { Center, Grid, Loader, Paper, Stack, Text } from "@mantine/core";
 import classes from "./ReadingsHistoryContainer.module.css";
 import { ReadingAreaChart } from "../charts/ReadingAreaChart";
 import { ReadingBarChart } from "../charts/ReadingBarChart";
-import { ReadingWindRadarChart } from "../charts/ReadingWindRose";
+import { ReadingWindRadarChart } from "../charts/ReadingWindRadar";
 import { getReadingsInDateRange } from "../../utils/getReadingsInDateRange";
 import { DateRangePicker } from "../DateRangePicker";
 
