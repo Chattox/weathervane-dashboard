@@ -10,7 +10,7 @@ export const ReadingWindRadarChart = (props: {
   return (
     <Center>
       <RadarChart
-        gridColor="wGrey.4"
+        gridColor="#ccc"
         h={props.isMobile ? 182 : 364}
         w="100%"
         data={props.data}
@@ -23,8 +23,9 @@ export const ReadingWindRadarChart = (props: {
           },
         ]}
         polarGridProps={{
-          strokeOpacity: 0.25,
+          strokeOpacity: 0.15,
           strokeDasharray: "5 5",
+          strokeWidth: 2,
         }}
         // @ts-expect-error mantine needs to fix their types
         radarProps={{ strokeWidth: 2 }}
