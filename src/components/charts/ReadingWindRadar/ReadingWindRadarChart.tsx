@@ -1,5 +1,6 @@
 import { Center } from "@mantine/core";
-import { PolarAngleAxis, PolarGrid, Radar, RadarChart } from "recharts";
+// import { PolarAngleAxis, PolarGrid, Radar, RadarChart } from "recharts";
+import { RadarChart } from "@mantine/charts";
 import { WindData } from "../../../types/global";
 
 export const ReadingWindRadarChart = (props: {
@@ -9,22 +10,25 @@ export const ReadingWindRadarChart = (props: {
   return (
     <Center>
       <RadarChart
-        width={props.isMobile ? 182 : 364}
-        height={props.isMobile ? 182 : 364}
-        outerRadius="80%"
+        gridColor="wGrey.4"
+        h={props.isMobile ? 182 : 364}
+        w="100%"
         data={props.data}
-      >
-        <PolarGrid strokeOpacity={0.3} stroke="#c9c9c9" strokeDasharray="5 5" />
-        <PolarAngleAxis dataKey="dir" stroke="#828282" strokeOpacity={0} />
-        <Radar
-          dataKey="amount"
-          stroke="var(--mantine-color-wGrey-4)"
-          fill="var(--mantine-color-wGrey-4)"
-          fillOpacity={0.6}
-          strokeWidth={2}
-          isAnimationActive={false}
-        />
-      </RadarChart>
+        dataKey="dir"
+        series={[
+          {
+            name: "amount",
+            opacity: 0.6,
+            color: "wGrey.4",
+          },
+        ]}
+        polarGridProps={{
+          strokeOpacity: 0.25,
+          strokeDasharray: "5 5",
+        }}
+        // @ts-expect-error mantine needs to fix their types
+        radarProps={{ strokeWidth: 2 }}
+      />
     </Center>
   );
 };
