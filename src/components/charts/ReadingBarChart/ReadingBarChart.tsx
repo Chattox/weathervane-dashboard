@@ -8,6 +8,7 @@ import { downsampleData, formatTimestamps } from "../../../utils";
 export const ReadingBarChart = (props: {
   data: IndividualReadingData[];
   measurement: string;
+  isMobile: boolean;
 }) => {
   const readingInfo = READINGS_LABELS[props.measurement];
 
@@ -21,11 +22,16 @@ export const ReadingBarChart = (props: {
   return (
     <Stack align="flex-end">
       <BarChart
-        h={300}
+        h={props.isMobile ? 150 : 300}
         data={chartData}
         dataKey="timestamp"
         unit={readingInfo.unit}
-        yAxisProps={{ domain: ["auto", "auto"], width: 70 }}
+        yAxisProps={{
+          domain: ["auto", "auto"],
+          width: props.measurement === "rain_per_second" ? 80 : 70,
+          tickLine: false,
+          interval: 0,
+        }}
         xAxisProps={{ tick: false }}
         series={[
           {

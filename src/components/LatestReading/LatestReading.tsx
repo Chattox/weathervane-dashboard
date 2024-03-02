@@ -8,9 +8,20 @@ import {
 import { Center, Group, Loader, Stack, Text } from "@mantine/core";
 import { READINGS_LABELS } from "../../consts";
 import { LatestReadingCard } from "../LatestReadingCard";
+import { MobileLatestReadingCard } from "../MobileLatestReadingCard";
 
-export const LatestReading = () => {
-  const [latestReading, setLatestReading] = useState<FormattedReading>();
+export const LatestReading = (props: { isMobile: boolean }) => {
+  const [latestReading, setLatestReading] = useState<FormattedReading>({
+    timestamp: "",
+    pressure: 0,
+    rain: 0,
+    wind_speed: 0,
+    temperature: 0,
+    humidity: 0,
+    wind_direction: 0,
+    rain_per_second: 0,
+    luminance: 0,
+  });
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
@@ -20,16 +31,22 @@ export const LatestReading = () => {
     });
   }, []);
 
-  const readingData = Object.keys(READINGS_LABELS).map((measurement: string) =>
-    measurement !== "cumulative_rain" ? (
-      <LatestReadingCard
-        measurement={measurement}
-        reading={latestReading?.[measurement] as number}
-        key={READINGS_LABELS[measurement].label}
-      />
-    ) : (
-      false
-    )
+  const readingData = props.isMobile ? (
+    <MobileLatestReadingCard latestReading={latestReading} />
+  ) : (
+    <Group w="100%" gap="xs" grow>
+      {Object.keys(READINGS_LABELS).map((measurement: string) =>
+        measurement !== "cumulative_rain" ? (
+          <LatestReadingCard
+            measurement={measurement}
+            reading={latestReading?.[measurement] as number}
+            key={READINGS_LABELS[measurement].label}
+          />
+        ) : (
+          false
+        )
+      )}
+    </Group>
   );
 
   return (
@@ -46,9 +63,8 @@ export const LatestReading = () => {
               ? formatSingleTimestamp(latestReading.timestamp)
               : "N/A"}
           </Text>
-          <Group w="100%" gap="xs" grow>
-            {readingData}
-          </Group>
+
+          {readingData}
         </Stack>
       )}
     </>
