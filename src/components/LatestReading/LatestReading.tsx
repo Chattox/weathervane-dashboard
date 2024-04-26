@@ -28,16 +28,12 @@ export const LatestReading = (props: { isMobile: boolean }) => {
   const [nextExpectedReadingTime, setNextExpectedReadingTime] = useState<Dayjs>(
     dayjs()
   );
-  const [isLate, setIsLate] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     getLatestReading().then((res) => {
       setLatestReading(formatReadings(res)[0]);
       setNextExpectedReadingTime(getNextExpectedReadingTime(res[0].timestamp));
-      if (dayjs().isAfter(nextExpectedReadingTime)) {
-        setIsLate(true);
-      }
       setLoading(false);
     });
   }, []);
@@ -84,7 +80,7 @@ export const LatestReading = (props: { isMobile: boolean }) => {
                     )
                   : "N/A"}
               </Text>
-              {isLate ? (
+              {dayjs().isAfter(nextExpectedReadingTime) ? (
                 <Text size="sm" fs="italic" className={classes.errorText}>
                   Reading is late, weather station may be offline
                 </Text>
