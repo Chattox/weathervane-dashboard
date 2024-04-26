@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
+import dayjs, { Dayjs } from "dayjs";
+import { Center, Group, Loader, Stack, Text } from "@mantine/core";
 import { FormattedReading } from "../../types/global";
 import {
   getLatestReading,
   formatReadings,
   formatSingleTimestamp,
+  getNextExpectedReadingTime,
 } from "../../utils";
-import { Center, Group, Loader, Stack, Text } from "@mantine/core";
 import { READINGS_LABELS } from "../../consts";
 import { LatestReadingCard } from "../LatestReadingCard";
 import { MobileLatestReadingCard } from "../MobileLatestReadingCard";
+import classes from "./LatestReading.module.css";
 
 export const LatestReading = (props: { isMobile: boolean }) => {
   const [latestReading, setLatestReading] = useState<FormattedReading>({
@@ -22,11 +25,19 @@ export const LatestReading = (props: { isMobile: boolean }) => {
     rain_per_second: 0,
     luminance: 0,
   });
+  const [nextExpectedReadingTime, setNextExpectedReadingTime] = useState<Dayjs>(
+    dayjs()
+  );
+  const [isLate, setIsLate] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     getLatestReading().then((res) => {
       setLatestReading(formatReadings(res)[0]);
+      setNextExpectedReadingTime(getNextExpectedReadingTime(res[0].timestamp));
+      if (dayjs().isAfter(nextExpectedReadingTime)) {
+        setIsLate(true);
+      }
       setLoading(false);
     });
   }, []);
@@ -57,12 +68,29 @@ export const LatestReading = (props: { isMobile: boolean }) => {
         </Center>
       ) : (
         <Stack>
-          <Text fw={500}>
-            Latest reading:{" "}
-            {latestReading
-              ? formatSingleTimestamp(latestReading.timestamp)
-              : "N/A"}
-          </Text>
+          <Stack gap={2}>
+            <Text fw={500}>
+              Latest reading:{" "}
+              {latestReading
+                ? formatSingleTimestamp(latestReading.timestamp)
+                : "N/A"}
+            </Text>
+            <Group>
+              <Text size="sm" fs="italic">
+                Next expected reading:{" "}
+                {latestReading
+                  ? formatSingleTimestamp(
+                      nextExpectedReadingTime?.toISOString()
+                    )
+                  : "N/A"}
+              </Text>
+              {isLate ? (
+                <Text size="sm" fs="italic" className={classes.errorText}>
+                  Reading is late, weather station may be offline
+                </Text>
+              ) : undefined}
+            </Group>
+          </Stack>
 
           {readingData}
         </Stack>
