@@ -1,6 +1,6 @@
 import { Divider, Group, Paper, Stack, Text } from "@mantine/core";
 import { FormattedReading } from "../../types/global";
-import { READINGS_LABELS } from "../../consts";
+import { COMPASS_DIRECTIONS, READINGS_LABELS } from "../../consts";
 import classes from "./MobileLatestReadingCard.module.css";
 
 export const MobileLatestReadingCard = (props: {
@@ -9,6 +9,10 @@ export const MobileLatestReadingCard = (props: {
   const readingDisplay = Object.keys(READINGS_LABELS).map(
     (measurement: string, i: number, arr: string[]) => {
       const { label, unit, color } = READINGS_LABELS[measurement];
+      const isWindDir = measurement === "wind_direction";
+      const readingDisplay = isWindDir
+        ? COMPASS_DIRECTIONS[props.latestReading[measurement]]
+        : props.latestReading[measurement];
 
       return measurement !== "cumulative_rain" ? (
         <Stack
@@ -23,11 +27,13 @@ export const MobileLatestReadingCard = (props: {
             {props.latestReading !== undefined ? (
               <>
                 <Text className={classes.measurement} c={color}>
-                  {props.latestReading[measurement]}
+                  {readingDisplay}
                 </Text>
-                <Text className={classes.unit} c={color}>
-                  {unit}
-                </Text>
+                {isWindDir ? undefined : (
+                  <Text className={classes.unit} c={color}>
+                    {unit}
+                  </Text>
+                )}
               </>
             ) : (
               <Text className={classes.errorText}>No data</Text>
