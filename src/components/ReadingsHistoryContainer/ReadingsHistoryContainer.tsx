@@ -18,7 +18,10 @@ import { ReadingWindRadarChart } from "../charts/ReadingWindRadar";
 import { getReadingsInDateRange } from "../../utils/getReadingsInDateRange";
 import { DateRangePicker } from "../DateRangePicker";
 
-export const ReadingsHistoryContainer = (props: { isMobile: boolean }) => {
+export const ReadingsHistoryContainer = (props: {
+  isMobile: boolean;
+  station: string;
+}) => {
   const [readings, setReadings] = useState<FormattedReadingRanges>({
     day: [],
     week: [],
@@ -32,7 +35,7 @@ export const ReadingsHistoryContainer = (props: { isMobile: boolean }) => {
   const [customRange, setCustomRange] = useState<string[]>([]);
 
   useEffect(() => {
-    getAllReadings().then((res) => {
+    getAllReadings(props.station).then((res) => {
       const formattedReadings = formatReadings(res);
       const readingsRanges: FormattedReadingRanges = {
         day: getReadingsInDateRange(formattedReadings, { period: "day" }),
@@ -47,7 +50,7 @@ export const ReadingsHistoryContainer = (props: { isMobile: boolean }) => {
 
       setLoading(false);
     });
-  }, []);
+  }, [props.station]);
 
   useEffect(() => {
     if (!loading) {
