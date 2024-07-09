@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.0](https://github.com/Chattox/weathervane-dashboard/compare/v1.0.0...v1.1.0) (2024-07-09)
+
+
+### Features
+
+* **dashboard:** add station switcher to handle multiple stations ([#20](https://github.com/Chattox/weathervane-dashboard/issues/20)) ([c4b8918](https://github.com/Chattox/weathervane-dashboard/commit/c4b89181239dbab009051f5164908fb751c93b7e))
+* **styling:** remove collapsible headers ([#18](https://github.com/Chattox/weathervane-dashboard/issues/18)) ([94ce3c2](https://github.com/Chattox/weathervane-dashboard/commit/94ce3c266bffb9257c57a9fe165993dfeba4bc0c))
+
 ## [1.0.0](https://github.com/Chattox/weathervane-dashboard/compare/v0.9.0...v1.0.0) (2024-07-09)
 
 
