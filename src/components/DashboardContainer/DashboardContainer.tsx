@@ -1,7 +1,6 @@
-import { Accordion, Box, Group, Title } from "@mantine/core";
+import { Box, Group, Title } from "@mantine/core";
 import { LatestReading } from "../LatestReading";
 import { ColorSchemeSwitcher } from "../ColorSchemeSwitcher";
-import classes from "./DashboardContainer.module.css";
 import { ReadingsHistoryContainer } from "../ReadingsHistoryContainer";
 
 export const DashboardContainer = (props: { isMobile: boolean }) => {
@@ -13,29 +12,16 @@ export const DashboardContainer = (props: { isMobile: boolean }) => {
         </Title>
         <ColorSchemeSwitcher />
       </Group>
-      <Accordion
-        multiple
-        defaultValue={["latest", "overview"]}
-        chevronPosition="left"
-        classNames={{
-          item: classes.item,
-          label: classes.label,
-          content: props.isMobile ? classes.content : undefined,
-        }}
-      >
-        <Accordion.Item key="latest" value="latest">
-          <Accordion.Control>Current conditions</Accordion.Control>
-          <Accordion.Panel>
-            <LatestReading isMobile={props.isMobile} />
-          </Accordion.Panel>
-        </Accordion.Item>
-        <Accordion.Item key="overview" value="overview">
-          <Accordion.Control>History</Accordion.Control>
-          <Accordion.Panel>
-            <ReadingsHistoryContainer isMobile={props.isMobile} />
-          </Accordion.Panel>
-        </Accordion.Item>
-      </Accordion>
+      <Title order={4} ta="left" my="sm">
+        Current conditions
+      </Title>
+
+      <LatestReading isMobile={props.isMobile} />
+      <Title order={4} ta="left" mt="md" mb="sm">
+        History
+      </Title>
+
+      <ReadingsHistoryContainer isMobile={props.isMobile} />
     </Box>
   );
 };
