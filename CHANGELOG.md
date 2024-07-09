@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/Chattox/weathervane-dashboard/compare/v1.1.0...v1.1.1) (2024-07-09)
+
+
+### Bug Fixes
+
+* **dashboard:** crash caused by race condition between stations and data GET requests ([#21](https://github.com/Chattox/weathervane-dashboard/issues/21)) ([f59a3ad](https://github.com/Chattox/weathervane-dashboard/commit/f59a3ad0af1b750f88f0569ebfd40e3a180abb8f))
+
 ## [1.1.0](https://github.com/Chattox/weathervane-dashboard/compare/v1.0.0...v1.1.0) (2024-07-09)
 
 
