@@ -15,7 +15,7 @@ function App() {
 
   useEffect(() => {
     getStations().then((resStations) => setStations(resStations));
-  });
+  }, []);
 
   return (
     <MantineProvider theme={theme} cssVariablesResolver={resolver}>
