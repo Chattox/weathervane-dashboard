@@ -4,16 +4,16 @@ const dbUrl = import.meta.env.PROD
   ? import.meta.env.PUBLIC_PROD_DB_URL
   : import.meta.env.PUBLIC_DEV_DB_URL;
 
-export const getAllReadings = () => {
+export const getAllReadings = (station: string) => {
   return axios
-    .get(`${dbUrl}/all`)
+    .get(`${dbUrl}/all`, { params: { station: station } })
     .then((res) => res.data)
     .catch((err) => console.log(err));
 };
 
-export const getLatestReading = () => {
+export const getLatestReading = (station: string) => {
   return axios
-    .get(`${dbUrl}/latest`)
+    .get(`${dbUrl}/latest`, { params: { station: station } })
     .then((res) => res.data)
     .catch((err) => console.log(err));
 };

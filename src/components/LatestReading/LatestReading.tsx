@@ -13,7 +13,10 @@ import { LatestReadingCard } from "../LatestReadingCard";
 import { MobileLatestReadingCard } from "../MobileLatestReadingCard";
 import classes from "./LatestReading.module.css";
 
-export const LatestReading = (props: { isMobile: boolean }) => {
+export const LatestReading = (props: {
+  isMobile: boolean;
+  station: string;
+}) => {
   const [latestReading, setLatestReading] = useState<FormattedReading>({
     timestamp: "",
     pressure: 0,
@@ -31,12 +34,12 @@ export const LatestReading = (props: { isMobile: boolean }) => {
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    getLatestReading().then((res) => {
+    getLatestReading(props.station).then((res) => {
       setLatestReading(formatReadings(res)[0]);
       setNextExpectedReadingTime(getNextExpectedReadingTime(res[0].timestamp));
       setLoading(false);
     });
-  }, []);
+  }, [props.station]);
 
   const readingData = props.isMobile ? (
     <MobileLatestReadingCard latestReading={latestReading} />
