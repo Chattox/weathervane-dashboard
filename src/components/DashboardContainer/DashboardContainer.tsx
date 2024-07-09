@@ -5,8 +5,11 @@ import { ReadingsHistoryContainer } from "../ReadingsHistoryContainer";
 import { useState } from "react";
 import { StationSwitcher } from "../StationSwitcher";
 
-export const DashboardContainer = (props: { isMobile: boolean }) => {
-  const [station, setStation] = useState<string>("garden-station");
+export const DashboardContainer = (props: {
+  isMobile: boolean;
+  stations: string[];
+}) => {
+  const [station, setStation] = useState<string>(props.stations[0]);
   return (
     <Box>
       <Group w="100%" justify="space-between">
@@ -20,7 +23,11 @@ export const DashboardContainer = (props: { isMobile: boolean }) => {
         <Title order={4} ta="left">
           Current conditions
         </Title>
-        <StationSwitcher station={station} setStation={setStation} />
+        <StationSwitcher
+          station={station}
+          setStation={setStation}
+          stations={props.stations}
+        />
       </Group>
       <LatestReading isMobile={props.isMobile} station={station} />
       <Title order={4} ta="left" mt="md" mb="sm">

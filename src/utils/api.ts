@@ -17,3 +17,10 @@ export const getLatestReading = (station: string) => {
     .then((res) => res.data)
     .catch((err) => console.log(err));
 };
+
+export const getStations = () => {
+  return axios
+    .get(`${dbUrl}/stations`)
+    .then((res) => res.data.stations)
+    .catch((err) => console.log(err));
+};

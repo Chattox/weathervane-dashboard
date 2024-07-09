@@ -4,10 +4,11 @@ import React from "react";
 export const StationSwitcher = (props: {
   station: string;
   setStation: React.Dispatch<React.SetStateAction<string>>;
+  stations: string[];
 }) => {
   return (
     <Select
-      data={["garden-station", "office-station", "generated-test-reading"]}
+      data={props.stations}
       value={props.station}
       onChange={(value) => props.setStation(value as string)}
       allowDeselect={false}
