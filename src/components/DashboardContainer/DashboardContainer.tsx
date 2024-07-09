@@ -2,7 +2,7 @@ import { Box, Group, Title } from "@mantine/core";
 import { LatestReading } from "../LatestReading";
 import { ColorSchemeSwitcher } from "../ColorSchemeSwitcher";
 import { ReadingsHistoryContainer } from "../ReadingsHistoryContainer";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { StationSwitcher } from "../StationSwitcher";
 
 export const DashboardContainer = (props: {
@@ -10,6 +10,11 @@ export const DashboardContainer = (props: {
   stations: string[];
 }) => {
   const [station, setStation] = useState<string>(props.stations[0]);
+
+  useEffect(() => {
+    setStation(props.stations[0]);
+  }, [props.stations]);
+
   return (
     <Box>
       <Group w="100%" justify="space-between">

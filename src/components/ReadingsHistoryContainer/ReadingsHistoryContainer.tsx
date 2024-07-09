@@ -35,6 +35,7 @@ export const ReadingsHistoryContainer = (props: {
   const [customRange, setCustomRange] = useState<string[]>([]);
 
   useEffect(() => {
+    setLoading(true);
     getAllReadings(props.station).then((res) => {
       const formattedReadings = formatReadings(res);
       const readingsRanges: FormattedReadingRanges = {
@@ -47,8 +48,9 @@ export const ReadingsHistoryContainer = (props: {
       };
 
       setReadings(readingsRanges);
-
-      setLoading(false);
+      if (props.station) {
+        setLoading(false);
+      }
     });
   }, [props.station]);
 

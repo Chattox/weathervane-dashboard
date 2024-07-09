@@ -34,11 +34,22 @@ export const LatestReading = (props: {
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    getLatestReading(props.station).then((res) => {
-      setLatestReading(formatReadings(res)[0]);
-      setNextExpectedReadingTime(getNextExpectedReadingTime(res[0].timestamp));
-      setLoading(false);
-    });
+    setLoading(true);
+    if (props.station) {
+      getLatestReading(props.station)
+        .then((res) => {
+          setLatestReading(formatReadings(res)[0]);
+          if (res.length) {
+            setNextExpectedReadingTime(
+              getNextExpectedReadingTime(res[0].timestamp)
+            );
+          }
+          if (props.station) {
+            setLoading(false);
+          }
+        })
+        .catch((err) => console.log(err));
+    }
   }, [props.station]);
 
   const readingData = props.isMobile ? (
