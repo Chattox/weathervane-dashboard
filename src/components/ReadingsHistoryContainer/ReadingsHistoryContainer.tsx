@@ -80,6 +80,7 @@ export const ReadingsHistoryContainer = (props: {
     rain_per_second: "bar",
     luminance: "area",
     cumulative_rain: "area",
+    voltage: "area",
   };
 
   const getChart = (data: IndividualReadingData[], measurement: string) => {
