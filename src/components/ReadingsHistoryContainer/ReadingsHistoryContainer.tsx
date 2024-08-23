@@ -1,13 +1,10 @@
 import { useEffect, useState } from "react";
+import { FormattedReading, IndividualReadingData } from "../../types/global";
 import {
-  FormattedReadingRanges,
-  IndividualReadingData,
-} from "../../types/global";
-import {
-  getAllReadings,
   formatReadings,
   getIndividualReadingHistory,
   formatWindData,
+  getDateRangeReadings,
 } from "../../utils";
 import { READINGS_LABELS } from "../../consts";
 import { Center, Grid, Loader, Paper, Stack, Text } from "@mantine/core";
@@ -15,60 +12,32 @@ import classes from "./ReadingsHistoryContainer.module.css";
 import { ReadingAreaChart } from "../charts/ReadingAreaChart";
 import { ReadingBarChart } from "../charts/ReadingBarChart";
 import { ReadingWindRadarChart } from "../charts/ReadingWindRadar";
-import { getReadingsInDateRange } from "../../utils/getReadingsInDateRange";
 import { DateRangePicker } from "../DateRangePicker";
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
 
 export const ReadingsHistoryContainer = (props: {
   isMobile: boolean;
   station: string;
 }) => {
-  const [readings, setReadings] = useState<FormattedReadingRanges>({
-    day: [],
-    week: [],
-    month: [],
-    year: [],
-    all: [],
-    custom: [],
-  });
+  dayjs.extend(utc);
+  const [readings, setReadings] = useState<FormattedReading[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [range, setRange] = useState<string>("day");
-  const [customRange, setCustomRange] = useState<string[]>([]);
+  const [startDate, setStartDate] = useState<string>(
+    dayjs().startOf("day").toISOString()
+  );
+  const [endDate, setEndDate] = useState<string>(dayjs().toISOString());
+  const [period, setPeriod] = useState<string>("");
 
   useEffect(() => {
     setLoading(true);
-    getAllReadings(props.station).then((res) => {
-      const formattedReadings = formatReadings(res);
-      const readingsRanges: FormattedReadingRanges = {
-        day: getReadingsInDateRange(formattedReadings, { period: "day" }),
-        week: getReadingsInDateRange(formattedReadings, { period: "week" }),
-        month: getReadingsInDateRange(formattedReadings, { period: "month" }),
-        year: getReadingsInDateRange(formattedReadings, { period: "year" }),
-        all: formattedReadings,
-        custom: [],
-      };
-
-      setReadings(readingsRanges);
+    getDateRangeReadings(props.station, startDate, endDate).then((res) => {
+      setReadings(formatReadings(res));
       if (props.station) {
         setLoading(false);
       }
     });
-  }, [props.station]);
-
-  useEffect(() => {
-    if (!loading) {
-      setLoading(true);
-      setReadings({
-        ...readings,
-        custom: getReadingsInDateRange(readings.all, {
-          start: customRange[0],
-          end: customRange[1],
-        }),
-      });
-      setLoading(false);
-      setRange("custom");
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [customRange]);
+  }, [props.station, startDate, endDate]);
 
   const chartTypes: Record<string, string> = {
     pressure: "area",
@@ -104,7 +73,7 @@ export const ReadingsHistoryContainer = (props: {
       case "windRose":
         return (
           <ReadingWindRadarChart
-            data={formatWindData(readings[range])}
+            data={formatWindData(readings)}
             isMobile={props.isMobile}
           />
         );
@@ -115,7 +84,7 @@ export const ReadingsHistoryContainer = (props: {
 
   const historyDisplays = Object.keys(READINGS_LABELS).map(
     (measurement: string) => {
-      const data = getIndividualReadingHistory(readings[range], measurement);
+      const data = getIndividualReadingHistory(readings, measurement);
       return (
         <Grid.Col
           span={props.isMobile ? 12 : 4}
@@ -140,6 +109,13 @@ export const ReadingsHistoryContainer = (props: {
     }
   );
 
+  const updateDateRange = (dates: string[]) => {
+    if (!dayjs(startDate).isSame(dates[0], "minutes")) {
+      setStartDate(dates[0]);
+      setEndDate(dates[1]);
+    }
+  };
+
   return (
     <>
       {loading ? (
@@ -149,10 +125,10 @@ export const ReadingsHistoryContainer = (props: {
       ) : (
         <Stack align="flex-start">
           <DateRangePicker
-            value={range}
-            onChange={setRange}
-            dateRange={customRange}
-            setDateRange={setCustomRange}
+            dateRange={[startDate, endDate]}
+            setDateRange={updateDateRange}
+            period={period}
+            setPeriod={setPeriod}
           />
           <Grid w="100%">{historyDisplays}</Grid>
         </Stack>
