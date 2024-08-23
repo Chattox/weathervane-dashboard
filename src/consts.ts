@@ -14,6 +14,7 @@ export const READINGS_LABELS: ReadingLabels = {
   },
   luminance: { label: "Luminance", unit: "lx" },
   cumulative_rain: { label: "Cumulative rain", unit: "mm" },
+  voltage: { label: "Voltage", unit: "V" },
 };
 
 export const COMPASS_DIRECTIONS: Record<number, string> = {

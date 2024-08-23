@@ -5,6 +5,7 @@ export type ApiReading = {
   model: string;
   uid: string;
   timestamp: string;
+  voltage?: number;
   readings: {
     pressure: number; // hectopascals (hPa)
     rain: number; // millimetres (mm)
@@ -18,7 +19,7 @@ export type ApiReading = {
 };
 
 export interface FormattedReading {
-  [key: string]: string | number;
+  [key: string]: string | number | undefined;
   timestamp: string;
   pressure: number;
   rain: number;
@@ -28,10 +29,11 @@ export interface FormattedReading {
   wind_direction: number;
   rain_per_second: number;
   luminance: number;
+  voltage?: number;
 }
 
 export interface FormattedReadingRanges {
-  [key: string]: FormattedReadingp[];
+  [key: string]: FormattedReading[];
   day: FormattedReading[];
   week: FormattedReading[];
   month: FormattedReading[];
@@ -51,6 +53,7 @@ export interface ReadingLabels {
   wind_direction: ReadingLabel;
   luminance: ReadingLabel;
   cumulative_rain: ReadingLabel;
+  voltage?: ReadingLabel;
 }
 
 export type ReadingLabel = {

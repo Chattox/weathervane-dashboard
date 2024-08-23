@@ -13,6 +13,7 @@ export const formatReadings = (readings: ApiReading[]): FormattedReading[] => {
       wind_direction: reading.readings.wind_direction,
       rain_per_second: round(reading.readings.rain_per_second, 4),
       luminance: reading.readings.luminance,
+      voltage: reading.voltage ? round(reading.voltage, 4) : reading.voltage,
     };
   });
 };
