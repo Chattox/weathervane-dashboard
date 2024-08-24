@@ -15,6 +15,7 @@ export const DateRangePicker = (props: {
     ? [dayjs(props.dateRange[0]).toDate(), dayjs(props.dateRange[1]).toDate()]
     : [dayjs().subtract(1, "day").toDate(), dayjs().toDate()];
   const [range, setRange] = useState<[Date | null, Date | null]>(initRange);
+  const [opened, setOpened] = useState<boolean>(false);
 
   const controlSegmentDict: Record<string, string> = {
     day: "24hr",
@@ -55,6 +56,7 @@ export const DateRangePicker = (props: {
           now.toISOString(),
         ]);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.period]);
 
   return (
@@ -62,6 +64,8 @@ export const DateRangePicker = (props: {
       position="bottom-start"
       shadow="sm"
       classNames={{ dropdown: classes.dropdown }}
+      opened={opened}
+      onChange={setOpened}
     >
       <Popover.Target>
         <Button
@@ -69,6 +73,7 @@ export const DateRangePicker = (props: {
           classNames={{ root: classes.buttonRoot }}
           leftSection={<IconClockHour9 size={16} />}
           rightSection={<IconChevronDown size={16} />}
+          onClick={() => setOpened((o) => !o)}
         >
           {controlSegmentDict[props.period]}
         </Button>
@@ -91,6 +96,7 @@ export const DateRangePicker = (props: {
 
                 setRange(e);
                 props.setPeriod("custom");
+                setOpened(false);
               } else {
                 setRange([e[0], null]);
                 props.setPeriod("custom");
@@ -103,7 +109,10 @@ export const DateRangePicker = (props: {
           <SegmentedControl
             orientation="vertical"
             value={props.period}
-            onChange={(e) => props.setPeriod(e)}
+            onChange={(e) => {
+              props.setPeriod(e);
+              setOpened(false);
+            }}
             data={[
               { label: "24hr", value: "day" },
               { label: "Week", value: "week" },
