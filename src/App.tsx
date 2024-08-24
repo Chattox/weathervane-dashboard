@@ -1,4 +1,4 @@
-import { MantineProvider } from "@mantine/core";
+import { Loader, MantineProvider } from "@mantine/core";
 import "@mantine/core/styles.css";
 import "@mantine/charts/styles.css";
 import "@mantine/dates/styles.css";
@@ -12,14 +12,25 @@ import { useEffect, useState } from "react";
 function App() {
   const isMobile = useMediaQuery("(max-width: 1024px)") || false;
   const [stations, setStations] = useState<string[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    getStations().then((resStations) => setStations(resStations));
+    getStations().then((resStations) => {
+      setStations(resStations);
+      if (stations) {
+        setLoading(false);
+      }
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <MantineProvider theme={theme} cssVariablesResolver={resolver}>
-      <DashboardContainer isMobile={isMobile} stations={stations} />
+      {loading ? (
+        <Loader size="xl" />
+      ) : (
+        <DashboardContainer isMobile={isMobile} stations={stations} />
+      )}
     </MantineProvider>
   );
 }
