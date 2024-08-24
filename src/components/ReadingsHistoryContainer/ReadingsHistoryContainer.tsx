@@ -118,21 +118,21 @@ export const ReadingsHistoryContainer = (props: {
 
   return (
     <>
-      {loading ? (
-        <Center>
-          <Loader size="xl" />
-        </Center>
-      ) : (
-        <Stack align="flex-start">
-          <DateRangePicker
-            dateRange={[startDate, endDate]}
-            setDateRange={updateDateRange}
-            period={period}
-            setPeriod={setPeriod}
-          />
+      <Stack align="flex-start">
+        <DateRangePicker
+          dateRange={[startDate, endDate]}
+          setDateRange={updateDateRange}
+          period={period}
+          setPeriod={setPeriod}
+        />
+        {loading ? (
+          <Center style={{ alignSelf: "center", padding: "9rem 0 9rem 0" }}>
+            <Loader />
+          </Center>
+        ) : (
           <Grid w="100%">{historyDisplays}</Grid>
-        </Stack>
-      )}
+        )}
+      </Stack>
     </>
   );
 };
