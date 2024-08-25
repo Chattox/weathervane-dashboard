@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.2.0](https://github.com/Chattox/weathervane-dashboard/compare/v1.1.1...v1.2.0) (2024-08-25)
+
+
+### Features
+
+* **history:** only get readings from specified date ranges rather than entire database ([#25](https://github.com/Chattox/weathervane-dashboard/issues/25)) ([ae3bb41](https://github.com/Chattox/weathervane-dashboard/commit/ae3bb41616d0bc934be8be41c2e984d20493c1ed))
+* **readings:** display voltage readings ([#23](https://github.com/Chattox/weathervane-dashboard/issues/23)) ([592fb66](https://github.com/Chattox/weathervane-dashboard/commit/592fb66b0493954bfeb4d051d198bd916f53e62f))
+
+
+### Bug Fixes
+
+* **history:** crash when attempting to view year history ([#26](https://github.com/Chattox/weathervane-dashboard/issues/26)) ([1afdb62](https://github.com/Chattox/weathervane-dashboard/commit/1afdb62646cf40d5666f197dcf7c6a36ded8febb))
+
 ## [1.1.1](https://github.com/Chattox/weathervane-dashboard/compare/v1.1.0...v1.1.1) (2024-07-09)
 
 
