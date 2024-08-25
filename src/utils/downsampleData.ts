@@ -8,9 +8,11 @@ export const downsampleData = (
 ): IndividualReadingData[] => {
   const tuples: DataPoint[] = data.map((reading: IndividualReadingData) => [
     Date.parse(reading.timestamp),
-    reading[measurement] as number,
+    reading[measurement] ? (reading[measurement] as number) : 0,
   ]);
 
+  console.log(tuples);
+  console.log(MAX_DATA_POINTS);
   const downsampledTuples = LTTB(tuples, MAX_DATA_POINTS);
 
   const downsampledData: IndividualReadingData[] = [];
