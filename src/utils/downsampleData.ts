@@ -11,8 +11,6 @@ export const downsampleData = (
     reading[measurement] ? (reading[measurement] as number) : 0,
   ]);
 
-  console.log(tuples);
-  console.log(MAX_DATA_POINTS);
   const downsampledTuples = LTTB(tuples, MAX_DATA_POINTS);
 
   const downsampledData: IndividualReadingData[] = [];
