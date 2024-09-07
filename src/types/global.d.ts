@@ -22,12 +22,12 @@ export interface FormattedReading {
   [key: string]: string | number | undefined;
   timestamp: string;
   pressure: number;
-  rain: number;
-  wind_speed: number;
+  rain?: number;
+  wind_speed?: number;
   temperature: number;
   humidity: number;
-  wind_direction: number;
-  rain_per_second: number;
+  wind_direction?: number;
+  rain_per_second?: number;
   luminance: number;
   voltage?: number;
 }

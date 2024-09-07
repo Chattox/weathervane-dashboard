@@ -1,0 +1,14 @@
+{
+  "garden-station": [
+    "pressure",
+    "rain",
+    "wind_speed",
+    "temperature",
+    "humidity",
+    "wind_direction",
+    "rain_per_second",
+    "luminance",
+    "voltage"
+  ],
+  "office-station": ["pressure", "temperature", "humidity", "luminance"]
+}
